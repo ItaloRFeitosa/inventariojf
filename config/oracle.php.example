@@ -1,5 +1,6 @@
 <?php
-
+// Exemplo da configuração do conexão com o banco oracle
+// Criar arquivo oracle.php
 return [
     'oracle' => [
         'driver' => 'oracle',
