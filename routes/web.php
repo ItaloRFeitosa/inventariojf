@@ -21,7 +21,7 @@ Route::get('/', function () {
     //                         ->where([['SICAM.TOMBO.NU_TOMBO', '=', 18835], ['SICAM.TOMBO.TI_TOMBO', '=', 'T'], ['SICAM.TERMO.AN_TERMO', '=', '2019']])
     //                         ->get());
 
-    dd(DB::connection('mysql')->table('teste')->select('*')->get());
+    //dd(DB::connection('mysql')->table('teste')->select('*')->get());
 });
 
 Route::get('/admin/dashboard', function () {
