@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTesteTable extends Migration
+class CreateTomboTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateTesteTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql')->create('teste', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nome');
+        Schema::connection('mysql')->create('tombo', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateTesteTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql')->dropIfExists('teste');
+        Schema::connection('mysql')->dropIfExists('tombo');
     }
 }
