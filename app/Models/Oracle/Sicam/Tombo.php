@@ -13,8 +13,19 @@ class Tombo extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+    
 
-    public function material(){
-        return $this->belongsTo(Material::class,'co_mat');
+    // Retorna descrição do material dado o código do material
+    public function descricaoMaterial(){
+        return Material::select('DE_MAT')->where('CO_MAT', $this->co_mat)->first()->de_mat;
     }
+
+
+    // Retorna model Termo referente ao tombo
+    public function termo(){
+
+        return Termo::where([['NU_TERMO', $this->nu_termo],['AN_TERMO',$this->an_termo]])->first();
+    }
+
+
 }

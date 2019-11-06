@@ -13,4 +13,9 @@ class Material extends Model
     public $timestamps = false;
 
     protected $guarded = [];
+
+    public function tombos(){
+        $co_mat = $this->co_mat;
+        return Tombo::where('co_mat', $co_mat)->where('ti_tombo', 'T');
+    }
 }
