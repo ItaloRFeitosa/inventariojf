@@ -1,6 +1,6 @@
 <div class="box box-success">
     <div class="box-body">
-        <form method="POST" action="{{route('inventario.create')}}">
+        <form method="POST" action="{{route('inventarios.create')}}">
             {{csrf_field()}}
             <div class="row">
                 <div class="col-md-12">
