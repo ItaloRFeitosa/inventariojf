@@ -17,7 +17,7 @@
         @include('includes.alerts')
         <div class="row">
             <div class="col-md-12">
-                @include('admin.inventario.includes.inventariosAtivos')
+                @include('admin.inventarios.includes.inventariosAtivos')
             </div>
         
         </div>
@@ -25,7 +25,7 @@
             
             <div class="col-md-12">
                 
-                @include('admin.inventario.includes.inventariosFinalizados')
+                @include('admin.inventarios.includes.inventariosFinalizados')
             </div>
             
         </div>
