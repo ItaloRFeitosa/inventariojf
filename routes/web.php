@@ -37,5 +37,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     });
 
     Route::resource('inventario', 'InventarioController');
+    
+    
 
 });
