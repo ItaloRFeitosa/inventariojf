@@ -1,18 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
 {
-    private $inventario;
-    private $totalPage = 9;
-
-    public function __construct($inventario)
-    {
-        $this->inventario = $inventario;
-    }
+    
 
     /**
      * Display a listing of the resource.
@@ -21,9 +16,8 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        $titulo_pag = 'Lista de Inventarios';
-        $inventarios = $this->inventario->paginate($this->totalPage);
-        return view('', compact('titulo_pag', 'inventario') );
+        
+        return view('admin.inventario.index');
     }
 
     /**
@@ -33,9 +27,8 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        $titulo_pag = 'Criando Inventario';
-        $localidadesDisponiveis = '';
-        return view('', compact('titulo_pag', 'localidadesDisponiveis') );
+        
+        return view('admin.inventario.create');
     }
 
     /**

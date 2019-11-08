@@ -19,6 +19,4 @@ class Inventario extends Model
             'ativo'
     ];
 
-    public $timestamps = false;
-
 }
