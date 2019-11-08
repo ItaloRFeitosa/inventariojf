@@ -36,6 +36,6 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         return view('admin.dashboard');
     });
 
-    Route::resource('inventario', 'InventarioController');
+    Route::resource('inventarios', 'InventarioController');
 
 });

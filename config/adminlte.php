@@ -135,7 +135,7 @@ return [
         ],
         [
             'text' => 'Inventários',
-            'url'  => 'admin/inventario',
+            'url'  => 'admin/inventarios',
             'icon' => 'fas fa-boxes',
         ],
         
