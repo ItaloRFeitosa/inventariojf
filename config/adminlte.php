@@ -130,13 +130,13 @@ return [
     'menu' => [
         [
             'text' => 'Dashboard',
-            'url'  => 'admin/dashboard',
+            'url'  => 'admin',
             'icon' => 'fas fa-columns',
         ],
         [
-            'text' => 'Evento',
-            'url'  => 'admin/evento',
-            'icon' => 'fas fa-calendar-alt',
+            'text' => 'Inventários',
+            'url'  => 'admin/inventario',
+            'icon' => 'fas fa-boxes',
         ],
         
     ],

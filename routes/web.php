@@ -30,6 +30,12 @@ Route::get('/', function () {
     
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
+Route::prefix('admin')->namespace('Admin')->group(function () {
+
+    Route::get('/', function(){
+        return view('admin.dashboard');
+    });
+
+    Route::resource('inventario', 'InventarioController');
+
 });
