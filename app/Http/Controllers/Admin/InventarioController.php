@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inventario;
+use App\Models\Oracle\Sarh\ServPessoal;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -54,7 +55,9 @@ class InventarioController extends Controller
     public function show(Inventario $inventario)
     {
         //dd($inventario);
-        return view('admin.inventarios.show', compact('inventario'));
+        $criado_por = ServPessoal::where('NU_MATR_SERVIDOR', $inventario->criado_por)->first()->no_servidor;
+        //dd($criado_por);
+        return view('admin.inventarios.show', compact('inventario','criado_por'));
     }
 
     /**

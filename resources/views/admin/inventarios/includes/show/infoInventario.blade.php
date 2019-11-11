@@ -24,7 +24,7 @@
                     <td>{{$inventario->ano}}</td>
                 </tr>
                 <tr>
-                    <td><strong>Localidade </strong></td>
+                    <td></i><strong>Localidade </strong><i class="fas fa-map-marker-alt"></td>
                     <td>{{$inventario->localidade}}</td>
                 </tr>
                 <tr>
@@ -32,16 +32,16 @@
                     <td>{{$inventario->portaria}}</td>
                 </tr>
                 <tr>
-                    <td><strong>Data de Inicio </strong></td>
+                    <td></i><strong>Data de Inicio </strong><i class="far fa-calendar-alt"></td>
                     <td>{{$inventario->data_inicio->format('d/M/Y')}}</td>
                 </tr>
                 <tr>
-                    <td><strong>Data para Finalização </strong></td>
+                    <td></i><strong>Data de Finalização </strong><i class="far fa-calendar-alt"></td>
                     <td>{{$inventario->data_fim->format('d/M/Y')}}</td>
                 </tr>
                 <tr>
-                    <td><strong>Criado por </strong></td>
-                    <td>{{$inventario->criado_por}}</td>
+                    <td></i><strong>Criado por </strong><i class="fas fa-user"></td>
+                    <td>{{$criado_por}}</td>
                 </tr>
                 
             </tbody>
