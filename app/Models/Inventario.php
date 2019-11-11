@@ -19,4 +19,9 @@ class Inventario extends Model
             'ativo'
     ];
 
+    protected $dates = [
+        'data_inicio',
+        'data_fim'
+    ];
+
 }

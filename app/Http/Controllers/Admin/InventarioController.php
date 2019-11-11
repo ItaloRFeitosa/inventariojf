@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inventario;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -16,8 +17,10 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.inventarios.index');
+        $inventarios = Inventario::all();
+        $inventariosAtivos = $inventarios->where('ativo', 1);
+        $inventariosFinalizados = $inventarios->where('ativo', 0);
+        return view('admin.inventarios.index', compact('inventariosAtivos','inventariosFinalizados'));
     }
 
     /**
@@ -48,9 +51,10 @@ class InventarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Inventario $inventario)
     {
-        //
+        //dd($inventario);
+        return view('admin.inventarios.show', compact('inventario'));
     }
 
     /**
