@@ -55,7 +55,8 @@ class InventarioController extends Controller
     public function show(Inventario $inventario)
     {
         //dd($inventario);
-        $criado_por = ServPessoal::where('NU_MATR_SERVIDOR', $inventario->criado_por)->first()->no_servidor;
+        //$criado_por = ServPessoal::where('NU_MATR_SERVIDOR', $inventario->criado_por)->first()->no_servidor;
+        $criado_por = $inventario->criado_por;
         //dd($criado_por);
         return view('admin.inventarios.show', compact('inventario','criado_por'));
     }
@@ -78,9 +79,13 @@ class InventarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Inventario $inventario)
     {
-        //
+        $dataForm = $request->all();
+
+        if ($inventario->update($dataForm)) {
+            return redirect()->back()->with('Status', 'Inventário Atualizado com Sucesso');
+        }
     }
 
     /**

@@ -8,7 +8,7 @@
         <h3 class="box-title" style="display: inline-block">Membros da Comissão</h3>
 
         @if($inventario->ativo == 1)
-        <a href="#" class="btn btn-success pull-right"><i class="fas fa-plus"></i> Adicionar Membro</a>
+        <a href="#" class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i> Adicionar Membro</a>
         
         @endif
         
