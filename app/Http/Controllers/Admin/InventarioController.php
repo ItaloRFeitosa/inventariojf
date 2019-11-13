@@ -84,7 +84,7 @@ class InventarioController extends Controller
         $dataForm = $request->all();
 
         if ($inventario->update($dataForm)) {
-            return redirect()->back()->with('Status', 'Inventário Atualizado com Sucesso');
+            return redirect()->back()->with('status', 'Inventário Atualizado com Sucesso');
         }
     }
 
@@ -94,8 +94,12 @@ class InventarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Inventario $inventario)
     {
-        //
+        if($inventario->delete()){
+
+            return redirect()->route('inventarios.index')->with('status', 'Inventário Excluído com Sucesso');
+        }
+        
     }
 }

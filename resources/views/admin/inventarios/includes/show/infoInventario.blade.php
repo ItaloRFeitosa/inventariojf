@@ -29,7 +29,7 @@
         @endif
         
     </div>
-    <form method="POST" action="{{route('inventarios.update', $inventario)}}">
+    <form id = "formUpdate" method="POST" action="{{route('inventarios.update', $inventario)}}">
 
         {{csrf_field()}}
         {{method_field('PUT')}}
@@ -74,21 +74,29 @@
                     </tr>
                     
                 </tbody>
-            </table>
-            <p class='toggle'><strong>Observações:  </strong>{{$inventario->obs}}</p>
+            </table>          
+            <div class="form-group toggle">
+                    <label for="obs">Observações:</label>
+                    <textarea disabled class='form-control form-control-sm' name="obs" rows="3">{{$inventario->obs}}</textarea>  
+                </div>
             <div class="form-group toggle" style="display:none">
                 <label for="obs">Observações:</label>
-                <textarea class='form-control form-control-sm'  name="obs" rows="5">{{$inventario->obs}}</textarea>  
+                <textarea class='form-control form-control-sm' name="obs" rows="3">{{$inventario->obs}}</textarea>  
             </div>
         </div>
-    
+    </form>
+    <form id = "formDelete" class="delete" method="POST" action="{{route('inventarios.destroy', $inventario)}}">
+            {{csrf_field()}}
+            {{method_field('DELETE')}}
+    </form>
         <div class="box-footer">
             <a href="#" class="btn btn-sm btn-warning pull-right toggle"><i class="fas fa-edit"></i> Editar Informações</a>
-            <a id="#" href="#" class="btn btn-sm btn-danger pull-right toggle" style="display:none"><i class="fas fa-trash-alt"></i> Excluir Inventário</a>
-            <button type=submit id="#" href="#" class="btn btn-sm btn-success pull-left toggle" style="display:none"><i class="fas fa-save"></i> Salvar</button>
+            
+            <button form = "formDelete" type=submit href="" class="btn btn-sm btn-danger pull-right toggle" onclick="return confirm('Tem certeza que deseja deletar este Inventário?')" style="display:none"><i class="fas fa-trash-alt"></i> Excluir Inventário</button>
+            <button form = "formUpdate" type=submit href="" class="btn btn-sm btn-success pull-left toggle" style="display:none"><i class="fas fa-save"></i> Salvar</button>
             <a href="#" class="btn btn-sm btn-default pull-left toggle" style="display:none"> Cancelar</a>
         </div>
-    </form>
+    
 </div>
 
 @push('js')
@@ -96,7 +104,7 @@
     $(document).ready(function () {
         $('.btn-warning, .btn-default').click(function(){
             $('.toggle').toggle();
-        });
+        });   
     });
 </script>
 @endpush
