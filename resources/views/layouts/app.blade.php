@@ -4,5 +4,5 @@
 @stop
 
 @section('js')
-    
+
 @stop

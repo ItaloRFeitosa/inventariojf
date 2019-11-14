@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Inventario;
 use App\Models\Oracle\Sarh\ServPessoal;
+use App\Models\Oracle\Sarh\Localidade;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -31,8 +32,8 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        
-        return view('admin.inventarios.create');
+        $localidades = Localidade::allLocalidadesDisponiveisInventario();
+        return view('admin.inventarios.create', compact('localidades'));
     }
 
     /**
@@ -41,9 +42,27 @@ class InventarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(
+        InventarioFormRequest $request,
+        CriadorDeInventario $criadorDeInventario)
     {
-        //
+        $invenatario =  $criadorDeInventario->criarInvenatario(
+            $request->name,
+            $request->ano,
+            $request->localidade,
+            $request->portaria,
+            $request->data_inicio,
+            $request->duracao,
+            $request->obs
+        );
+
+        $request->session()
+            ->flash(
+                'mensagem',
+                ""
+            );
+
+        return \redirect()->route('');
     }
 
     /**

@@ -3,68 +3,69 @@
         <form method="POST" action="{{route('inventarios.create')}}">
             {{csrf_field()}}
             <div class="row">
-                <div class="col-md-12">
+                <tb>
+                <div class="col-md-8">
                     <div class="form-group">
-                        <label for="phone">NÚMERO</label>
-                        <input name="phone" type="text" class="form-control" id="phone" placeholder="ex.: 32145665" value="{{old('phone')}}" autofocus>
+                        <label for="inventario">Nome</label>
+                        <input name="name" type="text" class="form-control" id="name" placeholder="ex.: Inventario JUS MA 2016.2" value="{{old('invenatrio')}}" autofocus>
                     </div>
                 </div>
-                <!--INPUT IMPRESSORA -->
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-
+                <!--INPUT NOME INVENTARIO -->
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="category">CATEGORIA</label>
-                        <input id="category_id" name="category_id" type="text" class="form-control" list="categories" autocomplete="off" value="{{old('category_id')}}" />
-                        <datalist id="categories">
-                            @forelse($categories as $c)
-                            <option value="{{$c->id}}">{{$c->name}}</option>
-                            @empty
-                            <option value="">----------</option>
-                            @endforelse
-                        </datalist>
-
+                        <label for="inventario">Ano</label>
+                        <input name="ano" type="number" class="form-control" id="ano" placeholder="2015" min="2000" max="9999" value="{{old('invenatrio')}}" autofocus>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
+                </tb>
+                <!--INPUT ANO INVENTARIO -->
+                <tb>
+                <div class="col-md-8">
                     <div class="form-group">
-                        <label for="sector_id">SETOR</label>
-                        <input id="sector_id" name="sector_id" type="text" class="form-control" list="sectors" autocomplete="off" value="{{old('sector_id')}}" />
-                        <datalist id="sectors">
-                            @forelse($sectors as $s)
-                            <option value="{{$s->id}}">{{$s->name}}</option>
-                            @empty
-                            <option value="">----------</option>
-                            @endforelse
-                        </datalist>
+                            <label>Localidade</label>
+                            <select class="js-example-basic-multiple form-control" name="states[]">
+                                    @foreach ($localidades as $localidade)
+                                        <option value=" {{ $localidade->lota_cod_lotacao }} "> {{ $localidade->lota_sigla_lotacao }} - {{ $localidade->lota_dsc_lotacao }}</option>  
+                                    @endforeach
+                            </select>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-12">
+                <!--INPUT LOCALIDADE INVENTARIO -->
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="user_id">USUÁRIO</label>
-                        <input id="user_id" name="user_id" type="text" class="form-control" list="users" autocomplete="off" value="{{old('sector_id')}}" />
-                        <datalist id="users">
-                            @forelse($users as $u)
-                            <option value="{{$u->id}}">{{$u->name}}</option>
-                            @empty
-                            <option value="">----------</option>
-                            @endforelse
-                        </datalist>
+                        <label for="inventario">Portaria</label>
+                        <input name="portaria" type="text" class="form-control" id="portaria" placeholder="ex.: SJMA-SECAD - 8046227" value="{{old('invenatrio')}}" autofocus>
                     </div>
                 </div>
-            </div>
+                </tb>
+                <!--INPUT PORTARIA INVENTARIO -->
+                <tb>
+                <div class="col-md-6">
+                    <label for="inventario">Data de Inicio</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="data_inicio" type="date" class="form-control" id="data_inicio"  value="{{old('invenatrio')}}" autofocus>
+                    </div>
+                </div>
+                <!--INPUT DATA INICIO INVENTARIO -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inventario">Periodo de duração</label>
+                        <input name="duracao" type="number" class="form-control" id="duracao" placeholder="60 dias corridos" min="1" max="365" value="{{old('invenatrio')}}" autofocus>
+                    </div>
+                </div>
+                </tb>
+                <!--INPUT PERIODO  DE DURAÇÃO INVENTARIO -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="inventario">Observação</label>
+                        <textarea name="obs" id="obs" class="form-control" rows="3" placeholder="Insira uma observação se nescessario" value="{{old('invenatrio')}}" ></textarea>
+                    </div>
+                </div>
+                <!--INPUT OBS INVENTARIO -->
 
-
-            <div class="row">
                 <div class="col-md-4">
                     <button class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
                 </div>
@@ -74,12 +75,11 @@
                 </div>
 
                 <div class="col-md-4">
-                    {{--<a href="{{url('printers')}}" class="btn btn-default btn-block"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Voltar p/ Impressoras</a>--}}
-                    <a href="{{url('admin/phones')}}" class="btn btn-default btn-block"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Voltar</a>
+                    <a href="{{route('inventarios.index')}}" class="btn btn-default btn-block"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Cancelar</a>
                 </div>
+                <!--BOTÕES-->
+
             </div>
-
         </form>
-
     </div>
 </div>
