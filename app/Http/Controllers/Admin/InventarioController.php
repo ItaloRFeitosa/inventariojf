@@ -58,11 +58,10 @@ class InventarioController extends Controller
 
         $request->session()
             ->flash(
-                'mensagem',
-                ""
+                
             );
 
-        return \redirect()->route('');
+        return redirect()->route('');
     }
 
     /**

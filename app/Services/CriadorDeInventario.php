@@ -18,7 +18,7 @@ class CriadorDeSerie
         String $obs
     ):Inventario {
         
-        $data_fim = dataFim($data_inicio,$duracao);
+        //$data_fim = dataFim($data_inicio,$duracao);
 
         DB::beginTransaction();
         
@@ -29,8 +29,8 @@ class CriadorDeSerie
                 'localidade' =>$localidade,
                 'portaria'   =>$portaria,
                 'data_inicio'=>$data_inicio,
-                'data_fim'   =>$data_fim,
-                'criado_por' =>$criado_por,
+                'data_fim'   =>$data_inicio,
+                'criado_por' =>'andrey',
                 'obs'        =>$obs
             ]
         );
@@ -40,10 +40,10 @@ class CriadorDeSerie
         return $inventario;
     }
 
-    private function dataFim($data_inicio,$duracao){
+    /* private function dataFim($data_inicio,$duracao){
 
         return FALSE;
-    }
+    } */
 
     
 }
