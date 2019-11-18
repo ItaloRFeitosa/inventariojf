@@ -15,7 +15,7 @@ use App\Models\Oracle\Sicam\Material;
 use App\Models\Oracle\Sicam\Tombo;
 use Illuminate\Support\Facades\DB;
 
-Route::get('/', function () {
+Route::get('/oracleTeste', function () {
     //dd(DB::table('SICAM.TOMBO')->select('NU_TOMBO','TI_TOMBO','CO_MAT')->where([['NU_TOMBO', '=', 18835], ['TI_TOMBO', '=', 'T']])->get());
     // dd(DB::connection('oracle')->table('SICAM.TOMBO')->join('SICAM.TERMO','SICAM.TOMBO.NU_TERMO', '=', 'SICAM.TERMO.NU_TERMO')
     //                         ->join('SARH.LOTACAO', 'SARH.LOTACAO.CO_LOTACAO', '=', 'SICAM.TERMO.CO_LOTA')
@@ -37,6 +37,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     });
 
     Route::resource('inventarios', 'InventarioController');
+
+    Route::resource('membros', 'MembroController');
     
     
 

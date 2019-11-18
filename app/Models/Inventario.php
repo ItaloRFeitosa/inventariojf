@@ -24,4 +24,7 @@ class Inventario extends Model
         'data_fim'
     ];
 
+    public function membros(){
+        return $this->hasMany(Membro::class, 'id_inventario');
+    }
 }
