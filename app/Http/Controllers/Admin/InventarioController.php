@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Inventario\InventarioFormRequest;
 use App\Models\Inventario;
 use App\Models\Oracle\Sarh\ServPessoal;
 use App\Models\Oracle\Sarh\Localidade;
+use Exception;
+use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
+use Throwable;
 
 class InventarioController extends Controller
 {
@@ -75,8 +79,9 @@ class InventarioController extends Controller
         //dd($inventario);
         //$criado_por = ServPessoal::where('NU_MATR_SERVIDOR', $inventario->criado_por)->first()->no_servidor;
         $criado_por = $inventario->criado_por;
+        $membros = $inventario->membros;
         //dd($criado_por);
-        return view('admin.inventarios.show', compact('inventario','criado_por'));
+        return view('admin.inventarios.show', compact('inventario','criado_por', 'membros'));
     }
 
     /**
@@ -97,27 +102,40 @@ class InventarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventario $inventario)
+    public function update(InventarioFormRequest $request, Inventario $inventario)
     {
-        $dataForm = $request->all();
+        try {
+            $dataForm = $request->all();
 
-        if ($inventario->update($dataForm)) {
-            return redirect()->back()->with('status', 'Inventário Atualizado com Sucesso');
+            if ($inventario->update($dataForm)) {
+                return redirect()->back()->with('status', 'Inventário Atualizado com Sucesso');
+            }
+        } catch (Throwable $th) {
+                return redirect()->back()->withErrors('Algo de errado aconteceu!')->withInput();
         }
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Inventario  $inventario
      * @return \Illuminate\Http\Response
      */
     public function destroy(Inventario $inventario)
     {
-        if($inventario->delete()){
-
-            return redirect()->route('inventarios.index')->with('status', 'Inventário Excluído com Sucesso');
+           
+        try {
+            if($inventario->delete()) {
+                return redirect()->route('inventarios.index')->with('status', 'Inventário Excluído com Sucesso!');
+            } else {
+                return redirect()->route('inventarios.index')->with('warning', 'Exclusão Falhou!');
+            }
+        } catch(ModelNotFoundException $e) {
+            return redirect()->route('inventarios.index')
+                                ->withErrors('O Inventário pode te sido apagado durante esta operação de exclusão!')->withInput();
+        } catch(Throwable $e) {
+            return redirect()->route('inventarios.index')->with('warning', 'Exclusão Falhou!');
         }
-        
     }
 }

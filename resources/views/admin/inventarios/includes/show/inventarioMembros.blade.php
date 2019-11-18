@@ -13,4 +13,8 @@
         @endif
         
     </div>
+
+    <div class="box-body">
+        @include('admin.membros.includes.index.tableMembros', compact('membros'))
+    </div>
 </div>

@@ -16,7 +16,7 @@
 <div class="box box-info">
         
 @else
-<div class="box box-success" style='height: 50em'>
+<div class="box box-success">
 @endif
     <div class="box-header with-border">
         <h3 class="box-title" style="display: inline-block">Informações do Inventário</h3>
@@ -57,13 +57,13 @@
 
                     <tr>
                         <td><strong>Data de Inicio </strong><i class="far fa-calendar-alt"></td>
-                        <td class='toggle'>{{$inventario->data_inicio->format('d/M/Y')}}</td>
+                        <td class='toggle'>{{$inventario->data_inicio->format('d/m/Y')}}</td>
                         <td class='toggle' style="display:none"><input type="date" name="data_inicio" value="{{$inventario->data_inicio->format('Y-m-d')}}"></td>
                     </tr>
 
                     <tr>
                         <td><strong>Data de Finalização </strong><i class="far fa-calendar-alt"></td>
-                        <td class='toggle'>{{$inventario->data_fim->format('d/M/Y')}}</td>
+                        <td class='toggle'>{{$inventario->data_fim->format('d/m/Y')}}</td>
                         <td class='toggle' style="display:none"><input type="date" name="data_fim" value="{{$inventario->data_fim->format('Y-m-d')}}"></td>
                     </tr>
 
@@ -93,7 +93,10 @@
             <a href="#" class="btn btn-sm btn-warning pull-right toggle"><i class="fas fa-edit"></i> Editar Informações</a>
             
             <button form = "formDelete" type=submit href="" class="btn btn-sm btn-danger pull-right toggle" onclick="return confirm('Tem certeza que deseja deletar este Inventário?')" style="display:none"><i class="fas fa-trash-alt"></i> Excluir Inventário</button>
+            @if ($inventario->ativo == 1)      
             <button form = "formUpdate" type=submit href="" class="btn btn-sm btn-success pull-left toggle" style="display:none"><i class="fas fa-save"></i> Salvar</button>
+            @endif
+            
             <a href="#" class="btn btn-sm btn-default pull-left toggle" style="display:none"> Cancelar</a>
         </div>
     
