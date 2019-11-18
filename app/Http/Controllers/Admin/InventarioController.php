@@ -7,6 +7,8 @@ use App\Models\Inventario;
 use App\Models\Oracle\Sarh\ServPessoal;
 use App\Models\Oracle\Sarh\Localidade;
 use Illuminate\Http\Request;
+use App\Services\CriadorDeInventario;
+use App\Http\Requests\InventariosFormRequest;
 
 class InventarioController extends Controller
 {
@@ -32,8 +34,9 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        $localidades = Localidade::allLocalidadesDisponiveisInventario();
-        return view('admin.inventarios.create', compact('localidades'));
+        //$localidades = Localidade::allLocalidadesDisponiveisInventario();
+        //return view('admin.inventarios.create', compact('localidades'));
+        return view('admin.inventarios.create');
     }
 
     /**
@@ -43,25 +46,33 @@ class InventarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(
-        InventarioFormRequest $request,
+        InventariosFormRequest $request,
         CriadorDeInventario $criadorDeInventario)
     {
-        $invenatario =  $criadorDeInventario->criarInvenatario(
+
+        $criado_por = 'ma375vo';
+        $localidade = '9';
+
+        $inventario =  $criadorDeInventario->criarInventario(
             $request->name,
             $request->ano,
-            $request->localidade,
+            $localidade,
             $request->portaria,
             $request->data_inicio,
             $request->duracao,
+            $criado_por,
             $request->obs
         );
 
         $request->session()
             ->flash(
-                
+                'mensagem',
+                "O inventario {$inventario->name} foi criado com sucesso"
             );
 
-        return redirect()->route('');
+        //return redirect()->route('admin.inventarios.index');
+
+        return view('admin.inventarios.show', compact('inventario', 'criado_por'));
     }
 
     /**

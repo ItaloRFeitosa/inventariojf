@@ -23,7 +23,7 @@ class CreateInventariosTable extends Migration
             $table->date('data_fim');
             $table->string('criado_por');
             $table->text('obs')->nullable();
-            $table->boolean('ativo')->default(FALSE); 
+            $table->boolean('ativo')->default(TRUE); 
             $table->timestamps(); //data_criacao
         });
     }

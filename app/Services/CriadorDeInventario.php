@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Models\Inventario;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\String_;
 
-class CriadorDeSerie
+class CriadorDeInventario
 {
     public function criarInventario(
         String $name,
@@ -15,10 +16,12 @@ class CriadorDeSerie
         String $portaria,
         String $data_inicio,
         int $duracao,
+        String $criado_por,
         String $obs
     ):Inventario {
         
-        //$data_fim = dataFim($data_inicio,$duracao);
+        $data_fim = CriadorDeInventario::dataFim($data_inicio, $duracao);
+
 
         DB::beginTransaction();
         
@@ -29,8 +32,8 @@ class CriadorDeSerie
                 'localidade' =>$localidade,
                 'portaria'   =>$portaria,
                 'data_inicio'=>$data_inicio,
-                'data_fim'   =>$data_inicio,
-                'criado_por' =>'andrey',
+                'data_fim'   =>$data_fim,
+                'criado_por' =>$criado_por,
                 'obs'        =>$obs
             ]
         );
@@ -40,10 +43,17 @@ class CriadorDeSerie
         return $inventario;
     }
 
-    /* private function dataFim($data_inicio,$duracao){
+    protected function dataFim($data_inicio, $duracao){
 
-        return FALSE;
-    } */
+        $carbon_inicio = new Carbon();
+
+        $carbon_inicio = Carbon::parse($data_inicio);
+        $carbon_fim = $carbon_inicio->addDays($duracao);
+
+        $data_fim = $carbon_fim->toDateString();
+
+        return $data_fim;
+    }
 
     
 }
