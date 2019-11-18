@@ -10,12 +10,10 @@ use App\Models\Oracle\Sarh\Localidade;
 use Exception;
 use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use App\Services\CriadorDeInventario;
 use App\Http\Requests\InventariosFormRequest;
-=======
 use Throwable;
->>>>>>> 75e9cfbd552475b1dd0e6f933859943dd8e42c90
+
 
 class InventarioController extends Controller
 {
