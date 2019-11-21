@@ -26,11 +26,11 @@ class InventariosFormRequest extends FormRequest
         return [
             'name'=> 'bail|required',
             'ano'=> 'bail|required|date_format:"Y"',
-            //'localidade'=> 'bail|string',
+            'localidade'=> 'bail|required',
             'portaria'=> 'bail|required',
             'data_inicio'=> 'bail|required|date',
             'duracao'=> 'bail|required|numeric',
-            'obs'=> 'bail',
+            'obs'=> 'bail|nullable',
         ];
     }
 
@@ -38,9 +38,11 @@ class InventariosFormRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'date' => 'O campo :attribute está em formato de data invalido',
             'ano.date_format:"Y"' => 'O campo :attribute está em formato invalido',
-            'duracao.numeric' => 'O campo :atribute deve representa a duração em dias corridos por numero inteiro',
+            'localidade.*' => 'A localidade não foi selecionada',
+            'data_inicio.date' => 'O campo :attribute está em formato de data invalido',
+            'duracao.numeric' => 'O campo :atribute deve representa, por numero inteiro, a duração em dias corridos para 
+                calculo da data final do inventario',
         ];
     }
 }

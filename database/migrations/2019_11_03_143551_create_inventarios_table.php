@@ -17,7 +17,7 @@ class CreateInventariosTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->year('ano');
-            $table->string('localidade');
+            $table->integer('localidade');
             $table->string('portaria');
             $table->date('data_inicio');
             $table->date('data_fim');

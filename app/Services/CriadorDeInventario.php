@@ -12,12 +12,12 @@ class CriadorDeInventario
     public function criarInventario(
         String $name,
         int $ano,
-        String $localidade,
+        int $localidade,
         String $portaria,
         String $data_inicio,
         int $duracao,
         String $criado_por,
-        String $obs
+        $obs
     ):Inventario {
         
         $data_fim = CriadorDeInventario::dataFim($data_inicio, $duracao);
@@ -43,9 +43,8 @@ class CriadorDeInventario
         return $inventario;
     }
 
-    protected function dataFim($data_inicio, $duracao){
 
-        $carbon_inicio = new Carbon();
+    protected static function dataFim($data_inicio, $duracao){
 
         $carbon_inicio = Carbon::parse($data_inicio);
         $carbon_fim = $carbon_inicio->addDays($duracao);
@@ -55,5 +54,19 @@ class CriadorDeInventario
         return $data_fim;
     }
 
-    
+
+    public static function valoresPadrao($localidades){
+        
+        $data = Carbon::now();
+        
+        $valores = Array(
+            'ano' => $ano = $data->year,
+            'data' => $data = $data->toDateString(),
+            'duracao'=> 60,
+            'localidade' => $localidades[0]->lota_cod_lotacao,
+        );
+
+        return $valores;
+    }
+
 }

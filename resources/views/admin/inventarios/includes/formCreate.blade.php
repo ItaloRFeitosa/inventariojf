@@ -7,14 +7,16 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="name">Nome</label>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="ex.: Inventario JUS MA 2016.2" value="{{old('name')}}" autofocus>
+                        <input name="name" type="text" class="form-control" id="name" placeholder="ex.: Inventario JUS MA 2016.2" 
+                        value="{{ old('name') }}" autofocus>
                     </div>
                 </div>
                 <!--INPUT NOME INVENTARIO -->
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="ano">Ano</label>
-                        <input name="ano" type="number" class="form-control" id="ano" placeholder="2015" min="2000" max="9999" value="{{old('ano')}}" autofocus>
+                        <input name="ano" type="number" class="form-control" id="ano" min="2000" max="9999" 
+                        value="{{ $valoresPadrao['ano'] or old('ano') }}" autofocus>
                     </div>
                 </div>
                 </tb>
@@ -22,11 +24,21 @@
                 <tb>
                 <div class="col-md-8">
                     <div class="form-group">
-                            <label>Localidade</label>
-                            <select class="js-example-basic-multiple form-control" name="states[]">
-                                    {{-- @foreach ($localidades as $localidade)
-                                        <option value=" {{ $localidade->lota_cod_lotacao }} "> {{ $localidade->lota_sigla_lotacao }} - {{ $localidade->lota_dsc_lotacao }}</option>  
-                                    @endforeach --}}
+                            <label for="localidade">Localidade</label>
+                            <select  name='localidade' id="localidade" class="form-control">
+                                    @foreach ($localidades as $localidade)
+                                        @if ($localidade->lota_cod_lotacao== $valoresPadrao['localidade']  )
+                                            <option selected value="{{ $localidade->lota_cod_lotacao }}">
+                                                    {{ $localidade->lota_sigla_lotacao }} - 
+                                                    {{ $localidade->lota_dsc_lotacao }}
+                                            </option>
+                                        @else
+                                            <option value="{{ $localidade->lota_cod_lotacao }}" > 
+                                                {{ $localidade->lota_sigla_lotacao }} - 
+                                                {{ $localidade->lota_dsc_lotacao }}
+                                            </option>
+                                        @endif  
+                                    @endforeach
                             </select>
                     </div>
                 </div>
@@ -34,7 +46,8 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="portaria">Portaria</label>
-                        <input name="portaria" type="text" class="form-control" id="portaria" placeholder="ex.: SJMA-SECAD - 8046227" value="{{old('portaria')}}" autofocus>
+                        <input name="portaria" type="text" class="form-control" id="portaria" placeholder="ex.: SJMA-SECAD - 8046227" 
+                        value="{{ old('portaria') }}" autofocus>
                     </div>
                 </div>
                 </tb>
@@ -46,14 +59,17 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input name="data_inicio" type="date" class="form-control" id="data_inicio"  value="{{old('data_inicio')}}" autofocus>
+                        <input name="data_inicio" type="date" class="form-control" id="data_inicio"  
+                        value="{{ $valoresPadrao['data'] or old('data_inicio') }}" autofocus>
                     </div>
                 </div>
                 <!--INPUT DATA INICIO INVENTARIO -->
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="duracao">Periodo de duração</label>
-                        <input name="duracao" type="number" class="form-control" id="duracao" placeholder="60 dias corridos" min="1" max="365" value="{{old('duracao')}}" autofocus>
+                        <label for="duracao">Duração</label>
+                        <label> (em dias)</label>
+                        <input name="duracao" type="number" class="form-control" id="duracao" min="1" max="365" 
+                        value="{{ $valoresPadrao['duracao'] or old('duracao') }}" autofocus>
                     </div>
                 </div>
                 </tb>
@@ -61,7 +77,8 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="obs">Observação</label>
-                        <textarea name="obs" id="obs" class="form-control" rows="3" placeholder="Insira uma observação se nescessario" value="{{old('obs')}}" ></textarea>
+                        <textarea name="obs" id="obs" class="form-control" rows="3" placeholder="Insira uma observação se nescessario" 
+                        value="{{ old('obs') }}" ></textarea>
                     </div>
                 </div>
                 <!--INPUT OBS INVENTARIO -->

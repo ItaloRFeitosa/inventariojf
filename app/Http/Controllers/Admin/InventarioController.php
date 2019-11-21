@@ -37,11 +37,12 @@ class InventarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CriadorDeInventario $criadorDeInventario)
     {
-        //$localidades = Localidade::allLocalidadesDisponiveisInventario();
-        //return view('admin.inventarios.create', compact('localidades'));
-        return view('admin.inventarios.create');
+        $localidades = Localidade::localidades();
+        $valoresPadrao = $criadorDeInventario->valoresPadrao($localidades);
+        return view('admin.inventarios.create', compact('localidades','valoresPadrao'));
+
     }
 
     /**
@@ -56,12 +57,11 @@ class InventarioController extends Controller
     {
 
         $criado_por = 'ma375vo';
-        $localidade = '9';
 
         $inventario =  $criadorDeInventario->criarInventario(
             $request->name,
             $request->ano,
-            $localidade,
+            $request->localidade,
             $request->portaria,
             $request->data_inicio,
             $request->duracao,
@@ -71,13 +71,12 @@ class InventarioController extends Controller
 
         $request->session()
             ->flash(
-                'mensagem',
-                "O inventario {$inventario->name} foi criado com sucesso"
+                'status',
+                "O inventario {$inventario->name} do ano de {$inventario->ano} foi criado com sucesso",
             );
+        
 
-        //return redirect()->route('admin.inventarios.index');
-
-        return view('admin.inventarios.show', compact('inventario', 'criado_por'));
+        return redirect()->route('inventarios.show', $inventario);
     }
 
     /**
@@ -88,12 +87,13 @@ class InventarioController extends Controller
      */
     public function show(Inventario $inventario)
     {
-        //dd($inventario);
-        //$criado_por = ServPessoal::where('NU_MATR_SERVIDOR', $inventario->criado_por)->first()->no_servidor;
-        $criado_por = $inventario->criado_por;
+        $localidade = Localidade::find($inventario->localidade);
+        $duracao = Inventario::duracaoInventario($inventario); 
+        $criado_por = ServPessoal::find( strtoupper($inventario->criado_por) );
+        
         $membros = $inventario->membros;
-        //dd($criado_por);
-        return view('admin.inventarios.show', compact('inventario','criado_por', 'membros'));
+
+        return view('admin.inventarios.show', compact('inventario', 'localidade', 'duracao', 'criado_por', 'membros'));
     }
 
     /**

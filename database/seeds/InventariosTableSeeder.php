@@ -14,7 +14,7 @@ class InventariosTableSeeder extends Seeder
         DB::table('inventarios')->insert([
                 'name' => 'JUSMA 2019.3',
                 'ano' => '2019',
-                'localidade' => 'Subseção de São Luis MA',
+                'localidade' => 9,
                 'portaria' => '8080 3679',
                 'data_inicio' => '2019-11-17',
                 'data_fim' => '2019-12-12',
@@ -27,7 +27,7 @@ class InventariosTableSeeder extends Seeder
         DB::table('inventarios')->insert([
             'name' => 'JUSMA 2015.1',
             'ano' => '2015',
-            'localidade' => 'Subseção de São Luis MA',
+            'localidade' => 9,
             'portaria' => '8080 3679',
             'data_inicio' => '2019-11-17',
             'data_fim' => '2019-12-12',
@@ -40,7 +40,7 @@ class InventariosTableSeeder extends Seeder
         DB::table('inventarios')->insert([
             'name' => 'JUSMA 2020.3',
             'ano' => '2020',
-            'localidade' => 'Subseção de Imperatriz MA',
+            'localidade' => 9,
             'portaria' => '8080 3679',
             'data_inicio' => '2019-11-17',
             'data_fim' => '2019-12-12',
@@ -53,7 +53,7 @@ class InventariosTableSeeder extends Seeder
         DB::table('inventarios')->insert([
             'name' => 'JUSMA 2019.1',
             'ano' => '2019',
-            'localidade' => 'Subseção de Bacabal MA',
+            'localidade' => 9,
             'portaria' => '8080 3679',
             'data_inicio' => '2019-11-17',
             'data_fim' => '2019-12-12',
@@ -66,7 +66,7 @@ class InventariosTableSeeder extends Seeder
         DB::table('inventarios')->insert([
             'name' => 'JUSMA Extra',
             'ano' => '2020',
-            'localidade' => 'Subseção de São Luis MA',
+            'localidade' => 9,
             'portaria' => '8080 3679',
             'data_inicio' => '2019-11-17',
             'data_fim' => '2019-12-12',

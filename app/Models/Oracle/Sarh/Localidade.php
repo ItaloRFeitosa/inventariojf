@@ -3,6 +3,7 @@
 namespace App\Models\Oracle\Sarh;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Localidade extends Model
 {
@@ -12,24 +13,16 @@ class Localidade extends Model
     public $incrementing = false;
     public $timestamps = false;
   
-    public static function allLocalidadesDisponiveisInventario(){
-
-        //Seções Disponiveis para inventariar
-        $codDisponiveis = [9,18,26,281,353];
-
-        $localidades = Localidade::all();
+    public static function localidades(){
         
-        foreach ($localidades as $localidade)
-        {
-            $disponiveis = [
-                $localidade->lota_cod_lotacao,
-                $localidade->lota_sigla_lotacao,
-                $localidade->lota_dsc_lotacao
-            ];
-        }
+        $codDisponiveis = [9,18,26,281,353];
+        $localidades = Localidade::find($codDisponiveis);
 
         return $localidades;
     }
+    
+
+    
 }
 
 

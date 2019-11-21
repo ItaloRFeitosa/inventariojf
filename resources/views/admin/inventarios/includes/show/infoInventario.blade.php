@@ -45,8 +45,9 @@
 
                     <tr>
                         <td><strong>Localidade </strong><i class="fas fa-map-marker-alt"></td>
-                        <td >{{$inventario->localidade}}</td>
-                        <td style="display:none"><input type="text" name="localidade" value="{{$inventario->localidade}}"></td>
+                        <td >{{ $localidade->lota_sigla_lotacao }} - {{ $localidade->lota_dsc_lotacao }}</td>
+                        <td style="display:none"><input type="text" name="localidade" 
+                            value="{{$inventario->localidade}}"></td>
                     </tr>
 
                     <tr>
@@ -66,11 +67,18 @@
                         <td class='toggle'>{{$inventario->data_fim->format('d/m/Y')}}</td>
                         <td class='toggle' style="display:none"><input type="date" name="data_fim" value="{{$inventario->data_fim->format('Y-m-d')}}"></td>
                     </tr>
+                    
+                    <tr>
+                        <td ><strong>Duração</strong></td>
+                        <td>{{$duracao}} dias </td>
+                        <td style="display:none"><input  type="number" name="ano" value="{{$duracao}}"></td>
+                    </tr>
 
                     <tr>
                         <td><strong>Criado por </strong><i class="fas fa-user"></td>
-                        <td>{{$criado_por}}</td>
-                        <td style="display:none"><input type="text" name="criado_por" value="{{$inventario->criado_por}}"></td>
+                        <td>{{$criado_por->no_servidor}}</td>
+                        <td style="display:none"><input type="text" name="criado_por" 
+                            value="{{$inventario->criado_por}}"></td>
                     </tr>
                     
                 </tbody>
