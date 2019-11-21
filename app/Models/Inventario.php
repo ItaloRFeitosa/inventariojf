@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-
+use App\Models\Oracle\Sarh\ServPessoal;
+use App\Models\Oracle\Sarh\RhLotacao;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
@@ -26,16 +27,9 @@ class Inventario extends Model
         'data_fim'
     ];
 
-    public static function duracaoInventario(Inventario $inventario){
+    public function duracaoInventario(){
 
-        $data_inicio = $inventario->data_inicio;
-        $data_fim = $inventario->data_fim;
-
-        $carbon_inicio = Carbon::parse($data_inicio);
-        $carbon_fim = Carbon::parse($data_fim);;
-
-        $duracao = $carbon_inicio->diffInDays($carbon_fim);
-
+        $duracao = $this->data_inicio->diffInDays($this->data_fim);
         return $duracao;
     }
 
@@ -43,4 +37,12 @@ class Inventario extends Model
         return $this->hasMany(Membro::class, 'id_inventario');
     }
 
+    public function criado_por_nome(){
+        return ServPessoal::where('NU_MATR_SERVIDOR', $this->criado_por)->first()->no_servidor;
+    }
+
+    public function lotacao(){
+        return RhLotacao::where('LOTA_COD_LOTACAO', $this->localidade)->first();
+
+    }
 }

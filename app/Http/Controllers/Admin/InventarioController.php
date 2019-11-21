@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Inventario\InventarioFormRequest;
+use App\Http\Requests\Admin\Inventario\UpdateInventarioFormRequest;
 use App\Models\Inventario;
 use App\Models\Oracle\Sarh\ServPessoal;
 use App\Models\Oracle\Sarh\Localidade;
@@ -11,7 +12,6 @@ use Exception;
 use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
 use App\Services\CriadorDeInventario;
-use App\Http\Requests\InventariosFormRequest;
 use Throwable;
 
 
@@ -52,11 +52,11 @@ class InventarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(
-        InventariosFormRequest $request,
+        InventarioFormRequest $request,
         CriadorDeInventario $criadorDeInventario)
     {
 
-        $criado_por = 'ma375vo';
+        $criado_por = 'MA375VO';
 
         $inventario =  $criadorDeInventario->criarInventario(
             $request->name,
@@ -70,12 +70,8 @@ class InventarioController extends Controller
         );
 
         $request->session()
-            ->flash(
-                'status',
-                "O inventario {$inventario->name} do ano de {$inventario->ano} foi criado com sucesso",
-            );
+            ->flash('status',"O inventario {$inventario->name} do ano de {$inventario->ano} foi criado com sucesso");
         
-
         return redirect()->route('inventarios.show', $inventario);
     }
 
@@ -86,14 +82,10 @@ class InventarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Inventario $inventario)
-    {
-        $localidade = Localidade::find($inventario->localidade);
-        $duracao = Inventario::duracaoInventario($inventario); 
-        $criado_por = ServPessoal::find( strtoupper($inventario->criado_por) );
-        
+    { 
         $membros = $inventario->membros;
 
-        return view('admin.inventarios.show', compact('inventario', 'localidade', 'duracao', 'criado_por', 'membros'));
+        return view('admin.inventarios.show', compact('inventario', 'membros'));
     }
 
     /**
@@ -114,16 +106,19 @@ class InventarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InventarioFormRequest $request, Inventario $inventario)
+    public function update(UpdateInventarioFormRequest $request, Inventario $inventario)
     {
         try {
             $dataForm = $request->all();
+            
 
             if ($inventario->update($dataForm)) {
+                $inventario->data_fim = $inventario->data_fim->addDays($request->duracao);
+                $inventario->save();
                 return redirect()->back()->with('status', 'Inventário Atualizado com Sucesso');
             }
         } catch (Throwable $th) {
-                return redirect()->back()->withErrors('Algo de errado aconteceu!')->withInput();
+                return redirect()->back()->withErrors($th->getMessage())->withInput();
         }
         
     }
@@ -147,7 +142,12 @@ class InventarioController extends Controller
             return redirect()->route('inventarios.index')
                                 ->withErrors('O Inventário pode te sido apagado durante esta operação de exclusão!')->withInput();
         } catch(Throwable $e) {
-            return redirect()->route('inventarios.index')->with('warning', 'Exclusão Falhou!');
+            if($e->getCode() == 23000 ){
+
+                return redirect()->back()->with('warning', 'Exclusão não permitida, inventário possui membros e coletas!');
+            } else {
+                return redirect()->route('inventarios.index')->with('warning', 'Erro desconhecido: ' + $e->getMessage());
+            }
         }
     }
 }
