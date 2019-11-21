@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-    <h1><i class="fas fa-boxes"></i> Inventários Anuais</h1>
+    {{-- <h1><i class="fas fa-boxes"></i> Estado dos Inventários</h1> --}}
     
 
 

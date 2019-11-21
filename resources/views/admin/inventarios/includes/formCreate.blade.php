@@ -15,8 +15,13 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="ano">Ano</label>
-                        <input name="ano" type="number" class="form-control" id="ano" min="2000" max="9999" 
-                        value="{{ $valoresPadrao['ano'] or old('ano') }}" autofocus>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <input name="ano" type="number" class="form-control" id="ano" min="2000" max="9999" 
+                            value="{{ $valoresPadrao['ano'] or old('ano') }}" autofocus>
+                        </div>
                     </div>
                 </div>
                 </tb>
@@ -25,29 +30,39 @@
                 <div class="col-md-8">
                     <div class="form-group">
                             <label for="localidade">Localidade</label>
-                            <select  name='localidade' id="localidade" class="form-control">
-                                    @foreach ($localidades as $localidade)
-                                        @if ($localidade->lota_cod_lotacao== $valoresPadrao['localidade']  )
-                                            <option selected value="{{ $localidade->lota_cod_lotacao }}">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fas fa-map-marker"></i>
+                                </div>
+                                    <select  name='localidade' id="localidade" class="form-control">
+                                        @foreach ($localidades as $localidade)
+                                            @if ($localidade->lota_cod_lotacao== $valoresPadrao['localidade']  )
+                                                <option selected value="{{ $localidade->lota_cod_lotacao }}">
+                                                        {{ $localidade->lota_sigla_lotacao }} - 
+                                                        {{ $localidade->lota_dsc_lotacao }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $localidade->lota_cod_lotacao }}" > 
                                                     {{ $localidade->lota_sigla_lotacao }} - 
                                                     {{ $localidade->lota_dsc_lotacao }}
-                                            </option>
-                                        @else
-                                            <option value="{{ $localidade->lota_cod_lotacao }}" > 
-                                                {{ $localidade->lota_sigla_lotacao }} - 
-                                                {{ $localidade->lota_dsc_lotacao }}
-                                            </option>
-                                        @endif  
-                                    @endforeach
-                            </select>
+                                                </option>
+                                            @endif  
+                                        @endforeach
+                                    </select>
+                            </div>    
                     </div>
                 </div>
                 <!--INPUT LOCALIDADE INVENTARIO -->
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="portaria">Portaria</label>
-                        <input name="portaria" type="text" class="form-control" id="portaria" placeholder="ex.: SJMA-SECAD - 8046227" 
-                        value="{{ old('portaria') }}" autofocus>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <input name="portaria" type="text" class="form-control" id="portaria" placeholder="ex.: SJMA-SECAD - 8046227" 
+                            value="{{ old('portaria') }}" autofocus>
+                        </div>
                     </div>
                 </div>
                 </tb>
@@ -57,7 +72,7 @@
                     <label for="data_inicio">Data de Inicio</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
+                            <i class="fas fa-calendar-day"></i>
                         </div>
                         <input name="data_inicio" type="date" class="form-control" id="data_inicio"  
                         value="{{ $valoresPadrao['data'] or old('data_inicio') }}" autofocus>
@@ -66,10 +81,14 @@
                 <!--INPUT DATA INICIO INVENTARIO -->
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="duracao">Duração</label>
-                        <label> (em dias)</label>
-                        <input name="duracao" type="number" class="form-control" id="duracao" min="1" max="365" 
-                        value="{{ $valoresPadrao['duracao'] or old('duracao') }}" autofocus>
+                        <label for="duracao">Duração (em dias)</label>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fas fa-calendar-week"></i>
+                            </div>
+                            <input name="duracao" type="number" class="form-control" id="duracao" min="1" max="365" 
+                            value="{{ $valoresPadrao['duracao'] or old('duracao') }}" autofocus>
+                        </div>
                     </div>
                 </div>
                 </tb>
@@ -77,8 +96,13 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="obs">Observação</label>
-                        <textarea name="obs" id="obs" class="form-control" rows="3" placeholder="Insira uma observação se nescessario" 
-                        value="{{ old('obs') }}" ></textarea>
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fas fa-align-left"></i>
+                            </div>
+                            <textarea name="obs" id="obs" class="form-control" rows="3" placeholder="Insira uma observação se nescessario" 
+                            value="{{ old('obs') }}" ></textarea>
+                        </div>
                     </div>
                 </div>
                 <!--INPUT OBS INVENTARIO -->

@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>inventar</b>.IO',
+    'logo' => '<b>inventar</b>.SJMA',
 
-    'logo_mini' => '<b>I</b>.IO',
+    'logo_mini' => '<b>I</b>.MA',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => null,
+    'layout' => 'top-nav',
 
     /*
     |--------------------------------------------------------------------------
@@ -128,11 +128,11 @@ return [
     */
 
     'menu' => [
-        [
+        /* [
             'text' => 'Dashboard',
             'url'  => 'admin',
             'icon' => 'fas fa-columns',
-        ],
+        ], */
         [
             'text' => 'Inventários',
             'url'  => 'admin/inventarios',

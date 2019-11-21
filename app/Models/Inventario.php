@@ -39,6 +39,11 @@ class Inventario extends Model
         return $duracao;
     }
 
+    public function tempoFinalizacao(){
+
+        return Carbon::now()->diffInDays($this->data_fim);
+    }
+
     public function membros(){
         return $this->hasMany(Membro::class, 'id_inventario');
     }
