@@ -46,7 +46,7 @@ class Inventario extends Model
         return ServPessoal::where('NU_MATR_SERVIDOR', $this->criado_por)->first()->no_servidor;
     }
 
-    public function lotacao(){
+    public function localidade(){
         return RhLotacao::where('LOTA_COD_LOTACAO', $this->localidade)->first();
 
     }

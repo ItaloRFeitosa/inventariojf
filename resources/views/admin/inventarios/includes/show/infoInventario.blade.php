@@ -55,7 +55,7 @@
 
                     <tr>
                         <td><strong>Localidade </strong><i class="fas fa-map-marker-alt"></td>
-                        <td >{{ $inventario->lotacao()->lota_sigla_lotacao }} - {{ $inventario->lotacao()->lota_dsc_lotacao }}</td>
+                        <td >{{ $inventario->localidade()->lota_sigla_lotacao }} - {{ $inventario->localidade()->lota_dsc_lotacao }}</td>
                     
                     </tr>
 
