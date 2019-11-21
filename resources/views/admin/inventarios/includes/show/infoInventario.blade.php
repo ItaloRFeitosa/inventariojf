@@ -2,10 +2,10 @@
 @push('css')
 <style>
         td {
-            width: 50%;
+            vertical-align: center;
         }
         input{
-            width: 100%;
+            width: 50%;
         }
 </style>
 @endpush
@@ -36,18 +36,27 @@
         
         <div class="box-body">
             <table class="table no-margin">
+                <thead>
+                    <tr>
+                        <th style="width: 30%">
+
+                        </th>
+
+                        <th>
+                            
+                        </th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
                         <td ><strong>Ano de Realização </strong></td>
                         <td>{{$inventario->ano}}</td>
-                        <td style="display:none"><input  type="number" name="ano" value="{{$inventario->ano}}"></td>
                     </tr>
 
                     <tr>
                         <td><strong>Localidade </strong><i class="fas fa-map-marker-alt"></td>
-                        <td >{{ $localidade->lota_sigla_lotacao }} - {{ $localidade->lota_dsc_lotacao }}</td>
-                        <td style="display:none"><input type="text" name="localidade" 
-                            value="{{$inventario->localidade}}"></td>
+                        <td >{{ $inventario->lotacao()->lota_sigla_lotacao }} - {{ $inventario->lotacao()->lota_dsc_lotacao }}</td>
+                    
                     </tr>
 
                     <tr>
@@ -61,24 +70,23 @@
                         <td class='toggle'>{{$inventario->data_inicio->format('d/m/Y')}}</td>
                         <td class='toggle' style="display:none"><input type="date" name="data_inicio" value="{{$inventario->data_inicio->format('Y-m-d')}}"></td>
                     </tr>
-
-                    <tr>
-                        <td><strong>Data de Finalização </strong><i class="far fa-calendar-alt"></td>
-                        <td class='toggle'>{{$inventario->data_fim->format('d/m/Y')}}</td>
-                        <td class='toggle' style="display:none"><input type="date" name="data_fim" value="{{$inventario->data_fim->format('Y-m-d')}}"></td>
-                    </tr>
                     
                     <tr>
-                        <td ><strong>Duração</strong></td>
-                        <td>{{$duracao}} dias </td>
-                        <td style="display:none"><input  type="number" name="ano" value="{{$duracao}}"></td>
+                        <td class='toggle'><strong>Duração</strong></td>
+                        <td class='toggle' style="display:none"><strong>Estender Duração</strong></td>
+                        <td class='toggle'>{{$inventario->duracaoInventario()}} dias </td>
+                        <td class='toggle' style="display:none"><input  type="number" name="duracao" value=0></td>
                     </tr>
+                    <tr>
+
+                        <td><strong>Data de Finalização </strong><i class="far fa-calendar-alt"></td>
+                        <td>{{$inventario->data_fim->format('d/m/Y')}}</td>
+                    </tr>
+                    
 
                     <tr>
                         <td><strong>Criado por </strong><i class="fas fa-user"></td>
-                        <td>{{$criado_por->no_servidor}}</td>
-                        <td style="display:none"><input type="text" name="criado_por" 
-                            value="{{$inventario->criado_por}}"></td>
+                        <td>{{$inventario->criado_por_nome()}}</td>
                     </tr>
                     
                 </tbody>
@@ -119,3 +127,4 @@
     });
 </script>
 @endpush
+

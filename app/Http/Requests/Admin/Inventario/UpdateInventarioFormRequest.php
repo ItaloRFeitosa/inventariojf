@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin\Inventario;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InventariosFormRequest extends FormRequest
+class UpdateInventarioFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,6 @@ class InventariosFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'bail|required',
-            'ano'=> 'bail|required|date_format:"Y"',
-            'localidade'=> 'bail|required',
             'portaria'=> 'bail|required',
             'data_inicio'=> 'bail|required|date',
             'duracao'=> 'bail|required|numeric',
@@ -39,7 +36,6 @@ class InventariosFormRequest extends FormRequest
         return [
             'required' => 'O campo :attribute é obrigatório',
             'ano.date_format:"Y"' => 'O campo :attribute está em formato invalido',
-            'localidade.*' => 'A localidade não foi selecionada',
             'data_inicio.date' => 'O campo :attribute está em formato de data invalido',
             'duracao.numeric' => 'O campo :atribute deve representa, por numero inteiro, a duração em dias corridos para 
                 calculo da data final do inventario',

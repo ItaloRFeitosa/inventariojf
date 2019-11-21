@@ -10,12 +10,12 @@
         @forelse ($membros as $membro)
             <tr>
                 <td style="width: 5%">{{$membro->nu_matr_servidor}}</td>
-                <td style="width: 80%">{{$membro->servPessoal()->no_servidor}}&nbsp;
+                <td style="width: 75%">{{$membro->servPessoal()->no_servidor}}&nbsp;
                     @if ($membro->flag_adm == 1)
                     <span class="label label-success">Adm</span>
                     @endif
                 </td>
-                <td style="width: 15%">
+                <td style="width: 20%">
                         <a href='#' title="Click para ver."><i
                             class="fa fa-eye text-info"></i></a>&nbsp;&nbsp;
                         <a href='#' title="Click para editar."><i

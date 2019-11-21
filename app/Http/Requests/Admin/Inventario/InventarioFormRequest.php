@@ -24,27 +24,25 @@ class InventarioFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'ano' => 'required',
-            'localidade' => 'required',
-            'portaria' => 'required',
-            'data_inicio' => 'required|date',
-            'data_fim' => 'required|date|after:data_inicio',
-            'criado_por' => 'required',
-            'obs' => 'nullable',
+            'name'=> 'bail|required',
+            'ano'=> 'bail|required|date_format:"Y"',
+            'localidade'=> 'bail|required',
+            'portaria'=> 'bail|required',
+            'data_inicio'=> 'bail|required|date',
+            'duracao'=> 'bail|required|numeric',
+            'obs'=> 'bail|nullable',
         ];
     }
 
     public function messages()
     {
         return [
-            'ano.*' => 'Ano corrente do Inventário é obrigatório!',
-            'localidade.*' => 'Localidade do Inventário é obrigatório!',
-            'portaria.*' => 'Portaria do Inventário é obrigatório!',
-            'data_inicio.*' => 'Data de Inicio do Inventário é obrigatório!',
-            'data_fim.required' => 'Data de Finalização do Inventário é obrigatório!',
-            'data_fim.after' => 'Data de Finalização do Inventário deve ser após a data de início!',
-            'criado_por.*' => 'Criador do Inventário é obrigatório!',
-            'obs.*' => 'Localidade do Inventário é obrigatório!',
+            'required' => 'O campo :attribute é obrigatório',
+            'ano.date_format:"Y"' => 'O campo :attribute está em formato invalido',
+            'localidade.*' => 'A localidade não foi selecionada',
+            'data_inicio.date' => 'O campo :attribute está em formato de data invalido',
+            'duracao.numeric' => 'O campo :atribute deve representa, por numero inteiro, a duração em dias corridos para 
+                calculo da data final do inventario',
         ];
     }
 }

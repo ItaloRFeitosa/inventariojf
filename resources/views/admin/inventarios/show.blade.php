@@ -9,16 +9,16 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             @include('includes.alerts')
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             
             @include('admin.inventarios.includes.show.infoInventario', compact('inventario'))
         </div>
-        <div class="col-md-4">  
+        <div class="col-md-5">  
             @include('admin.inventarios.includes.show.inventarioMembros', compact('membros'))
         </div>
     </div>
