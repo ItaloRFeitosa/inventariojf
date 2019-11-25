@@ -150,4 +150,28 @@ class InventarioController extends Controller
             }
         }
     }
+
+    public function reativar($id){
+        
+        $inventario = Inventario::findOrFail($id);
+        if ($inventario->reativar()) {
+            return redirect()->route('inventarios.index')
+            ->with('status', 'O Inventário foi reativado com sucesso!');
+        } else {
+            return redirect()->route('inventarios.show', compact('inventario'))
+            ->with('warning', 'Reativação Falhou!');
+        }
+        
+    }
+    public function finalizar($id){
+        
+        $inventario = Inventario::findOrFail($id);
+        if ($inventario->finalizar()) {
+            return redirect()->route('inventarios.index')
+            ->with('status', 'O Inventário foi finalizado com sucesso!');
+        } else {
+            return redirect()->route('inventarios.show', compact('inventario'))
+            ->with('warning', 'Finalização Falhou!');
+        }
+    }
 }

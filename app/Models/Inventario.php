@@ -27,26 +27,56 @@ class Inventario extends Model
         'data_fim'
     ];
 
-    public function duracaoInventario(){
+    public function duracaoInventario(){ //quantidade de dias totais do processo de invemtario
 
-        $duracao = $this->data_inicio->diffInDays($this->data_fim);
-        return $duracao;
+        return $this->data_inicio->diffInDays($this->data_fim);
     }
 
-    public function tempoFinalizacao(){
+    public function tempoFinalizacao(){ //quantidade de dias para finalização do invemtario
 
         return Carbon::now()->diffInDays($this->data_fim);
+    }
+
+    public function progresso(){ //progresso em porcentagem
+        return ( ( ($this->duracaoInventario() - $this->tempoFinalizacao() ) 
+        / $this->duracaoInventario() ) *100 );
+    }
+
+    public function isPosColeta(){ //já foi utrapassado o periodo
+        return ( $this->isAtivo() && Carbon::now() > $this->data_fim ) ? TRUE : FALSE;
+    }
+
+    public function  isPreColeta(){ //o periodo ainda não foi iniciado
+        return ( $this->isAtivo() && Carbon::now() < $this->data_inicio ) ? TRUE : FALSE;
+    }
+
+    public function isColetaAtiva(){ //esta dentro do periodo estipulado?
+        return ( $this->isAtivo() && !$this->isPosColeta() && !$this->isPreColeta() ) ? TRUE : FALSE; 
+    }
+
+    public function isAtivo(){ //o inventario esta ativo?
+        return $this->ativo;
+    }
+
+    public function finalizar(){ //finalizar o inventario
+        if( $this->isPosColeta() ){
+            return Inventario::update( ['ativo' => FALSE] );
+        }
+    }
+
+    public function reativar(){ //reativa o inventario
+        return Inventario::update( ['ativo' => TRUE] );
     }
 
     public function membros(){
         return $this->hasMany(Membro::class, 'id_inventario');
     }
 
-    public function criado_por_nome(){
+    public function criado_por_nome(){ //nome de quem criou
         return ServPessoal::where('NU_MATR_SERVIDOR', $this->criado_por)->first()->no_servidor;
     }
 
-    public function localidade(){
+    public function localidade(){ //descrição da localidade
         return RhLotacao::where('LOTA_COD_LOTACAO', $this->localidade)->first();
 
     }

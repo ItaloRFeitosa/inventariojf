@@ -12,7 +12,7 @@
 
 
 
-@if($inventario->ativo == 1)
+@if($inventario->isAtivo())
 <div class="box box-info">
         
 @else
@@ -21,8 +21,8 @@
     <div class="box-header with-border">
         <h3 class="box-title" style="display: inline-block">Informações do Inventário</h3>
 
-        @if($inventario->ativo == 1)
-        <span class="label label-info pull-right">Em progresso</span>
+        @if($inventario->isAtivo())
+        <span class="label label-info pull-right">Ativo</span>
         
         @else
         <span class="label label-success pull-right">Finalizado</span>
@@ -106,14 +106,14 @@
             {{method_field('DELETE')}}
     </form>
         <div class="box-footer">
-            <a href="#" class="btn btn-sm btn-warning pull-right toggle"><i class="fas fa-edit"></i> Editar Informações</a>
+            <a href="#" class="btn btn-sm btn-warning pull-right toggle" id="btn-editar"><i class="fas fa-edit"></i> Editar Informações</a>
             
             <button form = "formDelete" type=submit href="" class="btn btn-sm btn-danger pull-right toggle" onclick="return confirm('Tem certeza que deseja deletar este Inventário?')" style="display:none"><i class="fas fa-trash-alt"></i> Excluir Inventário</button>
-            @if ($inventario->ativo == 1)      
+            @if ($inventario->isAtivo())      
             <button form = "formUpdate" type=submit href="" class="btn btn-sm btn-success pull-left toggle" style="display:none"><i class="fas fa-save"></i> Salvar</button>
             @endif
             
-            <a href="#" class="btn btn-sm btn-default pull-left toggle" style="display:none"> Cancelar</a>
+            <a href="#" class="btn btn-sm btn-default pull-left toggle" id="btn-cancelar" style="display:none"> Cancelar</a>
         </div>
     
 </div>
@@ -121,7 +121,7 @@
 @push('js')
 <script>
     $(document).ready(function () {
-        $('.btn-warning, .btn-default').click(function(){
+        $('#btn-editar, #btn-cancelar').click(function(){
             $('.toggle').toggle();
         });   
     });

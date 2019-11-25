@@ -37,6 +37,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     });
 
     Route::resource('inventarios', 'InventarioController');
+    Route::get('invetarios/{id}/finalizar', 'InventarioController@finalizar')->name('inventarios.finalizar');
+    Route::get('invetarios/{id}/reativar', 'InventarioController@reativar')->name('inventarios.reativar');
 
     Route::resource('membros', 'MembroController');
     

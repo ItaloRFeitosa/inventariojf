@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Novo inventario')
+@section('title', 'Inventar SJMA - Novo')
 
 @section('content_header')
 
