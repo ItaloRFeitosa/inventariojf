@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Inventar SJMA - Detalhaes')
+@section('title', 'Inventar SJMA - Detalhes')
 
 @section('content_header')
 <h1><i class="fas fa-boxes"></i> {{$inventario->name}}</h1>
@@ -44,7 +44,7 @@
         <div class="col-md-5">  
             @include('admin.inventarios.includes.show.inventarioMembros', compact('membros'))
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
             @include('admin.inventarios.includes.show.acoesInventario', compact('inventario'))
         </div>
     </div>
