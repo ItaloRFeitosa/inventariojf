@@ -33,13 +33,30 @@ class Inventario extends Model
     }
 
     public function tempoFinalizacao(){ //quantidade de dias para finalização do invemtario
-
-        return Carbon::now()->diffInDays($this->data_fim);
+        
+        if($this->isColetaAtiva()){
+            return Carbon::now()->diffInDays($this->data_fim); //para finalizar
+        }
+        elseif($this->isPosColeta()){ //ja terminado
+            return 0;
+        }else
+            return NULL;
+        
     }
 
     public function progresso(){ //progresso em porcentagem
-        return ( ( ($this->duracaoInventario() - $this->tempoFinalizacao() ) 
-        / $this->duracaoInventario() ) *100 );
+        
+        if($this->isColetaAtiva()){
+            return ( ( ($this->duracaoInventario() - $this->tempoFinalizacao() ) 
+            / $this->duracaoInventario() ) *100 );
+        }
+        elseif($this->isPreColeta()){
+            return 0;
+        }
+        elseif($this->isPosColeta()){
+            return 100;
+        }
+        
     }
 
     public function isPosColeta(){ //já foi utrapassado o periodo
