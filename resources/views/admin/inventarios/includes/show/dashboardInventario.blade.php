@@ -5,14 +5,27 @@
 
             <div class="info-box-content">
               <span class="info-box-text">PROGRESSO</span>
-              <span class="info-box-number">{{( $inventario->duracaoInventario() - $inventario->tempoFinalizacao() )}} Dias</span>
+              
+              @if($inventario->isPreColeta())
+                <span class="info-box-number"> 0 Dias </span>
+              @else
+                <span class="info-box-number">{{( $inventario->duracaoInventario() - $inventario->tempoFinalizacao() )}} Dias</span>
+              @endif
 
               <div class="progress">
                 <div class="progress-bar" style="width: {{ $inventario->progresso() }}%"></div>
               </div>
-                  <span class="progress-description">
-                      Faltam {{$inventario->tempoFinalizacao()}} dias
-                  </span>
+
+                <span class="progress-description">
+                  @if($inventario->isColetaAtiva())
+                    Faltam {{$inventario->tempoFinalizacao()}} dias
+                  @elseif($inventario->isPreColeta())
+                    Inicia em {{$inventario->data_inicio->format('d/m/Y')}}
+                  @elseif($inventario->isPosColeta())
+                    Terminou {{$inventario->data_fim->format('d/m/Y')}}
+                  @endif
+                </span>
+
             </div>
             <!-- /.info-box-content -->
           </div>
