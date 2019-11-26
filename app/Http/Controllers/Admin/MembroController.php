@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Inventario;
+use App\Models\Membro;
+use App\Models\Oracle\Sarh\ServPessoal;
+use App\Services\CriadorDeMembro;
 
 class MembroController extends Controller
 {
@@ -25,7 +28,9 @@ class MembroController extends Controller
      */
     public function create()
     {
-        //
+        $servidores = Membro::servPessoal();
+        return view('admin.membros.create', compact('servidores'));
+        
     }
 
     /**

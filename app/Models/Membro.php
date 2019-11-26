@@ -10,7 +10,8 @@ class Membro extends Model
 {
     protected $fillable = [
         'id_inventario',
-        'nu_matr_servidor'
+        'nu_matr_servidor',
+        'flag_adm'
         
     ];
 
