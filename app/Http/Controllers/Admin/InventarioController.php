@@ -84,7 +84,7 @@ class InventarioController extends Controller
     public function show(Inventario $inventario)
     { 
         $membros = $inventario->membros;
-
+        
         return view('admin.inventarios.show', compact('inventario', 'membros'));
     }
 
