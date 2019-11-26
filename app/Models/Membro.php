@@ -21,10 +21,11 @@ class Membro extends Model
 
     public function servPessoal(){
         try {
-            return ServPessoal::where('NU_MATR_SERVIDOR', $this->nu_matr_servidor)->firstOrFail();
+            return ServPessoal::where('NU_MATR_SERVIDOR', $this->nu_matr_servidor)
+            ->where('FLAG_ATIVO', TRUE)->firstOrFail();
         } catch (ModelNotFoundException $e) {
             // Retorna o primeiro para evitar erros
-            return ServPessoal::first();
+            return ServPessoal::first(); //TO-DO trata esse erro
         }
     }
 }
