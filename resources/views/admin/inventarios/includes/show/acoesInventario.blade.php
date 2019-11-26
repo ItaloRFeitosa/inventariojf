@@ -1,8 +1,7 @@
 <div class="row">
-    <div class="col">
-        <div class="box-body">
-                <a href="{{route('inventarios.index')}}" class="btn btn-app">
-                        <i class="fa fa-play"></i> Coleta
+        
+                <a href="{{route('inventarios.index')}}" class="btn btn-block btn-lg btn-success">
+                        <i class="fa fa-play"></i><br> Coleta
                 </a>
-    </div>
+    
 </div>

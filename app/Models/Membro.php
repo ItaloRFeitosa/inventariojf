@@ -25,7 +25,7 @@ class Membro extends Model
             ->where('FLAG_ATIVO', TRUE)->firstOrFail();
         } catch (ModelNotFoundException $e) {
             // Retorna o primeiro para evitar erros
-            return ServPessoal::first(); //TO-DO trata esse erro
+            return null; //TO-DO trata esse erro
         }
     }
 }

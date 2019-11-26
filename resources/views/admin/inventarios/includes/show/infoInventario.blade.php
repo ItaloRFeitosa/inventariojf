@@ -38,7 +38,7 @@
             <table class="table no-margin">
                 <thead>
                     <tr>
-                        <th style="width: 30%">
+                        <th style="width: 37%">
 
                         </th>
 
@@ -73,9 +73,9 @@
                     
                     <tr>
                         <td class='toggle'><strong>Duração</strong></td>
-                        <td class='toggle' style="display:none"><strong>Estender Duração</strong></td>
+                        <td class='toggle' style="display:none"><strong>Atualizar Duração</strong></td>
                         <td class='toggle'>{{$inventario->duracaoInventario()}} dias </td>
-                        <td class='toggle' style="display:none"><input  type="number" name="duracao" value=0></td>
+                        <td class='toggle' style="display:none">{{$inventario->duracaoInventario()}} + <input  type="number" name="duracao" value=0></td>
                     </tr>
                     <tr>
 

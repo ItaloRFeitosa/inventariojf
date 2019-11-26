@@ -110,10 +110,9 @@ class InventarioController extends Controller
     {
         try {
             $dataForm = $request->all();
-            
-
+            $duracao = $inventario->duracaoInventario()+$request->duracao;
             if ($inventario->update($dataForm)) {
-                $inventario->data_fim = $inventario->data_fim->addDays($request->duracao);
+                $inventario->data_fim = $inventario->data_inicio->addDays($duracao);
                 $inventario->save();
                 return redirect()->back()->with('status', 'Inventário Atualizado com Sucesso');
             }
