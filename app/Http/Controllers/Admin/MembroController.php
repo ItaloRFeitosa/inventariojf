@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inventario;
 use App\Models\Membro;
 use App\Models\Oracle\Sarh\ServPessoal;
+use App\Models\Oracle\Sarh\RhLotacao;
 use App\Services\CriadorDeMembro;
 
 class MembroController extends Controller
@@ -18,7 +19,14 @@ class MembroController extends Controller
      */
     public function index()
     {
-        //
+        
+    }
+
+    public function inventarioMembrosIndex(Inventario $inventario)
+    {
+        $servidores = ServPessoal::ativos()->get();
+        $lotacoes = RhLotacao::all();
+        return view('admin.membros.inventarioMembroIndex', compact('servidores','inventario', 'lotacoes'));
     }
 
     /**
@@ -28,8 +36,7 @@ class MembroController extends Controller
      */
     public function create()
     {
-        $servidores = Membro::servPessoal();
-        return view('admin.membros.create', compact('servidores'));
+        
         
     }
 
@@ -41,7 +48,10 @@ class MembroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataform = $request->all();
+        if (Membro::create($dataform)) {
+            return redirect()->back()->with('status', 'Membro Adicionado com Sucesso');
+        }
     }
 
     /**

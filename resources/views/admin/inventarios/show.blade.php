@@ -23,7 +23,7 @@
         @endif
     </ol>
     
-
+<br>
 @stop
 
 @section('content')
@@ -41,12 +41,12 @@
         <div class="col-md-6">
             @include('admin.inventarios.includes.show.infoInventario', compact('inventario'))
         </div>
-        <div class="col-md-5">  
+        <div class="col-md-6">  
             @include('admin.inventarios.includes.show.inventarioMembros', compact('membros'))
         </div>
-        <div class="col-md-1">
+        {{-- <div class="col-md-1">
             @include('admin.inventarios.includes.show.acoesInventario', compact('inventario'))
-        </div>
+        </div> --}}
     </div>
     
 

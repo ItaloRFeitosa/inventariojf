@@ -12,8 +12,8 @@ class CriadorDeMembro
     public function criarMembro(
         Inventario $inventario,
         String $nu_matr_servidor,
-        Boolean $flag_adm
-    ):Membro {
+        $flag_adm
+        ){
 
         DB::beginTransaction();
         

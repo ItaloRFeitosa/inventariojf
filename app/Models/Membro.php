@@ -24,8 +24,8 @@ class Membro extends Model
             return ServPessoal::where('NU_MATR_SERVIDOR', $this->nu_matr_servidor)
             ->where('FLAG_ATIVO', TRUE)->firstOrFail();
         } catch (ModelNotFoundException $e) {
-            // Retorna o primeiro para evitar erros
-            return null; //TO-DO trata esse erro
+            // Retorna null para evitar erros
+            return null; 
         }
     }
 }

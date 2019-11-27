@@ -36,11 +36,19 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         return view('admin.dashboard');
     });
 
-    Route::resource('inventarios', 'InventarioController');
-    Route::get('invetarios/{id}/finalizar', 'InventarioController@finalizar')->name('inventarios.finalizar');
-    Route::get('invetarios/{id}/reativar', 'InventarioController@reativar')->name('inventarios.reativar');
 
+    Route::resource('inventarios', 'InventarioController');
     Route::resource('membros', 'MembroController');
+
+    Route::prefix('inventarios')->group(function () {
+        Route::get('{id}/finalizar', 'InventarioController@finalizar')->name('inventarios.finalizar');
+        Route::get('{id}/reativar', 'InventarioController@reativar')->name('inventarios.reativar');
+        Route::get('{inventario}/membros', 'MembroController@inventarioMembrosIndex')->name('inventario.membros.index');
+    });
+    
+    
+    
+    
     
     
 

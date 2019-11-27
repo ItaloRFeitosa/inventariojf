@@ -25,5 +25,8 @@ class ServPessoal extends Model
         return Termo::where('NU_MATR_RESP_TOMBO', $this->nu_matr_servidor)->paginate();
     }
 
+    public static function ativos(){
+        return ServPessoal::where('FLAG_ATIVO', TRUE);
+    }
 
 }

@@ -12,18 +12,18 @@
                 <td style="width: 5%">{{$membro->nu_matr_servidor}}</td>
                 @if (null == $membro->servPessoal())
 
-                <td class='form-group has-warning' style="width: 75%"> Não Encontrado&nbsp;<span class="label label-warning">Verificar</span></td>  
+                <td class='form-group has-warning' style="border-color: #f39c12"> Não Encontrado&nbsp;<span class="label label-warning">Verificar</span></td>  
          
                 @else
                     
-                <td style="width: 75%; border-color: #f39c12">{{$membro->servPessoal()->no_servidor}}&nbsp;
+                <td>{{$membro->servPessoal()->no_servidor}}&nbsp;
                     @if ($membro->flag_adm == 1)
                     <span class="label label-success">Adm</span>
                     @endif
                 </td>
 
                 @endif
-                <td style="width: 20%">
+                <td style="width: 70px">
                         <a href='#' title="Click para ver."><i
                             class="fa fa-eye text-info"></i></a>&nbsp;&nbsp;
                         <a href='#' title="Click para editar."><i
