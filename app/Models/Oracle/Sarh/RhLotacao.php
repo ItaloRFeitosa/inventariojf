@@ -36,4 +36,15 @@ class RhLotacao extends Model
     public function servidoresLotacao(){
         return ServLotacao::where('CO_LOTACAO', $this->lota_cod_lotacao)->where('DT_SAIDA', null)->get();
     }
+
+    public static function paisEFilhas(){
+        $lotacoes = RhLotacao::where('LOTA_DAT_FIM', NULL)->get();
+        $lotacoes = $lotacoes->mapToGroups(function($lotacao, $key){
+            //dd($lotacao->lotacaoPai()['lota_sigla_lotacao']);
+            $pai = $lotacao->lotacaoPai();
+            return [($pai['lota_cod_lotacao'].' - '.$pai['lota_sigla_lotacao'].' - '.$pai['lota_dsc_lotacao']) => $lotacao];
+            
+        });
+        return $lotacoes;
+    }
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Boolean;
 use phpDocumentor\Reflection\Types\String_;
 
-class CriadorDeMembro
+class MembroRepository
 {
     public function criarMembro(
         Inventario $inventario,

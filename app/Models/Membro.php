@@ -19,6 +19,10 @@ class Membro extends Model
         return $this->belongsTo(Inventario::class, 'id_inventario');
     }
 
+    public function responsabilidades() {
+        return $this->hasMany(Responsabilidade::class, 'id_membro');
+    }
+
     public function servPessoal(){
         try {
             return ServPessoal::where('NU_MATR_SERVIDOR', $this->nu_matr_servidor)
