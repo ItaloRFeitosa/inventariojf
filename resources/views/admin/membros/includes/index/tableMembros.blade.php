@@ -3,6 +3,9 @@
         <tr>
             <th>Matrícula</th>
             <th>Nome</th>
+
+            @yield('responsabilidades_header')
+            
             <th>Ações</th>
         </tr>
     </thead>
@@ -23,6 +26,9 @@
                 </td>
 
                 @endif
+
+                @yield('responsabilidades_body')
+
                 <td style="width: 70px">
                         <a href="{{route('inventario.membros.show', [$membro->inventario, $membro])}}" title="Click para ver."><i
                             class="fa fa-eye text-info"></i></a>&nbsp;&nbsp;

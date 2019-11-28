@@ -41,10 +41,15 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::resource('membros', 'MembroController');
 
     Route::prefix('inventarios')->group(function () {
+        
         Route::get('{id}/finalizar', 'InventarioController@finalizar')->name('inventarios.finalizar');
         Route::get('{id}/reativar', 'InventarioController@reativar')->name('inventarios.reativar');
         Route::get('{inventario}/membros', 'MembroController@inventarioMembrosIndex')->name('inventario.membros.index');
+<<<<<<< HEAD
         Route::get('{inventario}/membros/{membro}', 'MembroController@inventarioMembrosShow')->name('inventario.membros.show');
+=======
+        Route::get('{inventario}/membros/{membro}/edit', 'MembroController@inventarioMembroEdit')->name('inventario.membro.edit');
+>>>>>>> 89a57498d2deb0636b8f1b7c43e724db5379375c
     });
     
     
