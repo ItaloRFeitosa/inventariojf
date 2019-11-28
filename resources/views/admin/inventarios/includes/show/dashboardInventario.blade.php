@@ -1,5 +1,6 @@
 <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
+          @if($inventario->isAtivo())
           <div class="info-box bg-aqua">
             <span class="info-box-icon"><i class="fas fa-calendar-week"></i></span>
 
@@ -27,11 +28,29 @@
                 </span>
 
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
+          @elseif(!$inventario->isAtivo())
+          <div class="info-box bg-aqua">
+              <span class="info-box-icon"><i class="fas fa-calendar-week"></i></span>
+  
+              <div class="info-box-content">
+                <span class="info-box-text">PROGRESSO</span>
+                  <span class="info-box-number">{{( $inventario->duracaoInventario() - $inventario->tempoFinalizacao() )}} Dias</span>
+               
+  
+                <div class="progress">
+                  <div class="progress-bar" style="width: 100%"></div>
+                </div>
+  
+                  <span class="progress-description">
+                      Inventario Finalizado
+                  </span>
+  
+              </div>
+            </div>
+            @endif
         </div>
-        <!-- /.col -->
+
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box bg-green">
             <span class="info-box-icon"><i class="fas fa-barcode"></i></span>

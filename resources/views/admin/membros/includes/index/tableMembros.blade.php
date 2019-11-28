@@ -18,13 +18,13 @@
                     
                 <td>{{$membro->servPessoal()->no_servidor}}&nbsp;
                     @if ($membro->flag_adm == 1)
-                    <span class="label label-success">Adm</span>
+                    <span class="label label-success">ADM</span>
                     @endif
                 </td>
 
                 @endif
                 <td style="width: 70px">
-                        <a href='#' title="Click para ver."><i
+                        <a href="{{route('inventario.membros.show', [$membro->inventario, $membro])}}" title="Click para ver."><i
                             class="fa fa-eye text-info"></i></a>&nbsp;&nbsp;
                         <a href='#' title="Click para editar."><i
                             class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;

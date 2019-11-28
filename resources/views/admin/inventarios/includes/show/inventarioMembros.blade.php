@@ -13,10 +13,6 @@
         
     </div>
     
-    <div class="col-md-12">
-       {{--  @include('admin.membros.create', compact('servidores')) --}}
-    </div>
-    
     <div class="box-body">
         @include('admin.membros.includes.index.tableMembros', compact('membros'))
     </div>

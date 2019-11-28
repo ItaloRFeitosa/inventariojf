@@ -42,7 +42,7 @@
             @include('admin.inventarios.includes.show.infoInventario', compact('inventario'))
         </div>
         <div class="col-md-6">  
-            @include('admin.inventarios.includes.show.inventarioMembros', compact('membros'))
+            @include('admin.inventarios.includes.show.inventarioMembros', compact('inventario', 'membros'))
         </div>
         {{-- <div class="col-md-1">
             @include('admin.inventarios.includes.show.acoesInventario', compact('inventario'))
