@@ -8,7 +8,7 @@
         <h3 class="box-title" style="display: inline-block">Membros da Comissão</h3>
 
         @if($inventario->isAtivo())
-        <a href="{{route('inventario.membros.index',$inventario)}}" class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i> Adicionar Membro</a>
+        <a href="{{route('inventario.membros.index',$inventario)}}" class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i> Editar Comissão</a>
         @endif
         
     </div>

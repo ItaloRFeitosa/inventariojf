@@ -77,8 +77,7 @@ class MembroController extends Controller
      */
     public function inventarioMembrosShow(Inventario $inventario, Membro $membro)
     {   
-        $responsabilidades = RhLotacao::where('LOTA_LOTA_COD_LOTACAO_PAI',$inventario->localidade)->paginate(10);
-        return view('admin.membros.inventarioMembroShow', compact('inventario','membro','responsabilidades'));
+        return view('admin.membros.inventarioMembroShow', compact('inventario','membro'));
     }
 
     /**

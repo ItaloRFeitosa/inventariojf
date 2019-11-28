@@ -43,17 +43,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-12">
             @include('admin.membros.includes.show.infoMembroResponsabilidades')
         </div>
         {{-- <div class="col-md-1">
             @include('admin.membros.includes.show.acoesMembro')
         </div>  --}}
-    </div>
-    <div class="row">
-            <div class="col-md-12">  
-                @include('admin.membros.includes.show.infoMembroColetas')
-            </div>
     </div>
     
 
