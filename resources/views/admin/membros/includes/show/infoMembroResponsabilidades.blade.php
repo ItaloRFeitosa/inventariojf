@@ -34,7 +34,8 @@
                         <span class="badge bg-light-blue">50/100</span>
                     </td>
                     <td>
-                        <a href="#" title="Detalhes">
+                        <a  type="button" class="btn" onclick="showDetalhes($responsabilidade)"
+                        id="btn-detalhe" value="" title="Detalhes">
                                 <i class="fa fa-eye text-info"></i>
                         </a>
                         <a href="#" title="Coletas">
@@ -60,9 +61,13 @@
 
 
 <div class="col-md-5">  
-        <div class="box box-default">
+        @if($inventario->isAtivo())
+        <div class="box box-info">    
+        @else
+        <div class="box box-success">
+        @endif
             <div class="box-header with-border">
-            <h3 class="box-title">Detalhes</h3>
+            <h3 id="sigla_lotacao" class="box-title"><i class="fa fa-eye text-info"></i></h3>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -92,3 +97,14 @@
 </div>
 
 </div>
+
+
+@push('js')
+<script>
+  function showDetalhes($responsabilidade) {
+    /* var sigla_lotacao = document.getElementById("btn-detalhe").value; */
+    console.log($responsabilidade);
+    document.getElementById("sigla_lotacao").innerHTML = $responsabilidade->lotacao()->lota_sigla_lotacao;
+  }
+</script>
+@endpush

@@ -14,7 +14,7 @@
         @if($inventario->isAtivo())
             @if($inventario->isColetaAtiva())
                 <a href="{{route('inventarios.show',$inventario )}}" class="btn btn-block btn-info">
-                    <i class="fas fa-hourglass-half"></i> Em Coletar
+                    <i class="fas fa-hourglass-half"></i> Em Coleta
                 </a>
             @elseif($inventario->isPosColeta())
                 <a href="{{route('inventarios.show',$inventario )}}" class="btn btn-block btn-warning">
