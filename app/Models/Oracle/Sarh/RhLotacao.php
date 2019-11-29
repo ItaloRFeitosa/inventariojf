@@ -47,4 +47,12 @@ class RhLotacao extends Model
         });
         return $lotacoes;
     }
+
+    public function lotacoesPaiAte($nivel){
+
+        //hirarquia
+    }
+
 }
+
+
