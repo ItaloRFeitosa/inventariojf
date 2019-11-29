@@ -3,11 +3,14 @@
         <div class="box-header">
                 <h3 class="box-title" style="display: inline-block">Editar Membro</h3>
                 
-                        <button class="btn btn-danger pull-right" type=""><i class="fa fa-times" aria-hidden="true"></i> Excluir</button>
 
         </div>
         <div class="box-body">
-            <form method="POST" action="{{route('membros.update', $membro)}}">
+            <form id = "formDelete" class="delete" method="POST" action="{{route('membros.destroy', $membro)}}">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+            </form>
+            <form method="POST" id = "formUpdate" action="{{route('membros.update', $membro)}}">
                 {{csrf_field()}}
                 {{method_field('PUT')}}
                 <div class="row">
@@ -87,24 +90,29 @@
                                 </div>
                             </div>
                     </div>
+            </form>
                     <div class="row">
 
                                 
-                                <div class="col-md-8">
-                                    
-                                </div>
-                                <div class="col-md-2">
-                                <a href='{{route('inventario.membros.index', $membro->inventario)}}' class="btn btn-default btn-block" type="reset"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>
-                                </div>
-                                <div class="col-md-2">
-                                    <button class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
-                                </div>
+                        <div class="col-md-2">
+                            <button form='formDelete' class="btn btn-danger" type=submit onclick="return confirm('Tem certeza que deseja deletar este Membro?')"><i class="fa fa-times" aria-hidden="true" ></i> Excluir</button>
+
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-2">
+                            <a href='{{route('inventario.membros.index', $membro->inventario)}}' class="btn btn-default btn-block" type="reset"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>
+                        </div>
+                        <div class="col-md-2">
+                            <button form='formUpdate' class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
+                        </div>
                 
                 
     
                     </div>
                     
-            </form>
+            
         </div>
 </div>
 

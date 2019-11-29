@@ -112,17 +112,13 @@ class MembroController extends Controller
         $responsabilidades = $membro->responsabilidades;
         if(!empty($responsabilidades)){
 
-        
-            if(empty($dataform['responsabilidades'])){
-                
-                foreach($responsabilidades as $responsabilidade){
-                    $responsabilidade->cod_lotacao = 0;
-                    $responsabilidade->cod_setor = 0;//por enquanto
-                    $responsabilidade->delete();
-                }
-                
+            foreach($responsabilidades as $responsabilidade){
+                $responsabilidade->cod_lotacao = 0;
+                $responsabilidade->cod_setor = 0;//por enquanto
+                $responsabilidade->delete();
             }
-            else{
+        }
+        if(!empty($dataform['responsabilidades'])){   
                 foreach($dataform['responsabilidades'] as $lota_cod){
                     $responsabilidade = new Responsabilidade;
                     $responsabilidade->id_membro = $membro->id;
@@ -130,17 +126,6 @@ class MembroController extends Controller
                     $responsabilidade->cod_setor = 'sem setor';//por enquanto
                     $responsabilidade->save();
                 }
-            }
-
-        }
-        else{
-            foreach($dataform['responsabilidades'] as $lota_cod){
-                $responsabilidade = new Responsabilidade;
-                $responsabilidade->id_membro = $membro->id;
-                $responsabilidade->cod_lotacao = $lota_cod;
-                $responsabilidade->cod_setor = 'sem setor';//por enquanto
-                $responsabilidade->save();
-            }
         }
 
         if($membro->update($dataform)){
@@ -157,8 +142,8 @@ class MembroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Membro $membro)
     {
-        //
+        dd($membro);
     }
 }
