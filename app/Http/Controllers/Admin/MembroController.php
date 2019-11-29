@@ -144,6 +144,36 @@ class MembroController extends Controller
      */
     public function destroy(Membro $membro)
     {
-        dd($membro);
+        try {
+            $inventario = $membro->inventario;
+            if($inventario->isPreColeta()){
+                $responsabilidades = $membro->responsabilidades;
+                if(!empty($responsabilidades)){
+
+                    foreach($responsabilidades as $responsabilidade){
+                        $responsabilidade->cod_lotacao = 0;
+                        $responsabilidade->cod_setor = 'nda';
+                        $responsabilidade->delete();
+                    }
+                }
+                if($membro->delete()) {
+                    return redirect()->route('inventario.membros.index', $inventario)->with('status', 'Membro Excluído com Sucesso!');
+                } else {
+                    return redirect()->route('inventario.membros.index', $inventario)->with('warning', 'Exclusão Falhou!');
+                }
+            } else {
+                return redirect()->route('inventario.membros.index', $inventario)->with('warning', 'Exclusão Falhou! - Inventário já foi iniciado!');
+            }
+        } catch(ModelNotFoundException $e) {
+            return redirect()->route('inventario.membros.index', $inventario)
+                                ->withErrors('O Membro pode te sido apagado durante esta operação de exclusão!')->withInput();
+        } catch(Throwable $e) {
+            if($e->getCode() == 23000 ){
+
+                return redirect()->back()->with('warning', 'Exclusão não permitida, Membro possui membros e coletas!');
+            } else {
+                return redirect()->route('inventario.membros.index', $inventario)->with('warning', 'Erro desconhecido: ' + $e->getMessage());
+            }
+        }
     }
 }
