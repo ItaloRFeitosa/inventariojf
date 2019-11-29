@@ -139,6 +139,12 @@ return [
             'icon' => 'fas fa-boxes',
             'submenu' => [
                 [
+                    'text' => 'Todos',
+                    'url'  => 'admin/inventarios',
+                    'icon' => 'fas fa-th'
+                ],
+
+                [
                     'text' => 'Pre Coleta',
                     'url'  => 'admin/inventarios',
                     'icon' => 'far fa-hourglass'

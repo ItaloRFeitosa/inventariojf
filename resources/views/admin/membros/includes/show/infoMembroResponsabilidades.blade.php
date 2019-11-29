@@ -1,5 +1,5 @@
 <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-12">
             @if($inventario->isAtivo())
             <div class="box box-info">    
             @else
@@ -7,8 +7,10 @@
             @endif
         <div class="box-header">
           <h3 class="box-title">Responsabilidades</h3>
-          <a href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Editar">
-                <i class="pull-right fa fa-edit text-warning"></i>
+          @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
+            <a href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Editar">
+                  <i class="pull-right fa fa-edit text-warning"></i>
+          @endif
         </a>
         </div>
         <!-- /.box-header -->
@@ -19,7 +21,7 @@
               <th>Sigla</th>
               <th>Lotação</th>
               <th style="width: 40px">Coletas</th>
-              <th>Ações</th>
+              <th style="width: 100px">Ações</th>
             </tr>
             @foreach ($membro->responsabilidades()->paginate(5) as $responsabilidade)
                 <tr>
@@ -60,7 +62,7 @@
     </div>
 
 
-<div class="col-md-5">  
+{{-- <div class="col-md-5">  
         @if($inventario->isAtivo())
         <div class="box box-info">    
         @else
@@ -108,3 +110,4 @@
   }
 </script>
 @endpush
+ --}}

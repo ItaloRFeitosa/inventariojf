@@ -35,7 +35,9 @@
             
             <td style="width: 70px">
                 <a href='{{route('inventario.membros.show', [$membro->inventario, $membro])}}' title="Click para ver."><i class="fa fa-eye text-info"></i></a>&nbsp;&nbsp;
-                <a href='{{route('inventario.membro.edit', [$inventario, $membro])}}' title="Click para editar."><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;
+                @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
+                    <a href='{{route('inventario.membro.edit', [$inventario, $membro])}}' title="Click para editar."><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;
+                @endif
             </td>
         </tr>
 
