@@ -56,13 +56,7 @@ class MembroController extends Controller
         if ($membro) {
             if(!empty($dataform['responsabilidades'])){
                 
-                foreach($dataform['responsabilidades'] as $lota_cod){
-                    $responsabilidade = new Responsabilidade;
-                    $responsabilidade->id_membro = $membro->id;
-                    $responsabilidade->cod_lotacao = $lota_cod;
-                    $responsabilidade->cod_setor = 'sem setor';//por enquanto
-                    $responsabilidade->save();
-                }
+                $membro->insertResponsabilidades($dataform['responsabilidades']);
                 
             }
             return redirect()->back()->with('status', 'Membro Adicionado com Sucesso');
@@ -109,31 +103,19 @@ class MembroController extends Controller
     public function update(Request $request, Membro $membro)
     {
         $dataform = $request->all();
-        $responsabilidades = $membro->responsabilidades;
-        if(!empty($responsabilidades)){
 
-            foreach($responsabilidades as $responsabilidade){
-                $responsabilidade->cod_lotacao = 0;
-                $responsabilidade->cod_setor = 0;//por enquanto
-                $responsabilidade->delete();
-            }
-        }
-        if(!empty($dataform['responsabilidades'])){   
-                foreach($dataform['responsabilidades'] as $lota_cod){
-                    $responsabilidade = new Responsabilidade;
-                    $responsabilidade->id_membro = $membro->id;
-                    $responsabilidade->cod_lotacao = $lota_cod;
-                    $responsabilidade->cod_setor = 'sem setor';//por enquanto
-                    $responsabilidade->save();
-                }
-        }
+        
+        $membro->updateResponsabilidades($dataform['responsabilidades']);
+  
 
         if($membro->update($dataform)){
-
-            return redirect()->route('inventario.membros.index', $membro->inventario)->with('status', 'Membro Atualizado com Sucesso');
-        }
-        
+                return redirect()->route('inventario.membros.index', $membro->inventario)->with('status', 'Membro Atualizado com Sucesso');
+            }
     }
+        
+
+        
+    
     
 
     /**
@@ -146,13 +128,12 @@ class MembroController extends Controller
     {
         try {
             $inventario = $membro->inventario;
-            if($inventario->isPreColeta()){
+            if(true){// todo: teste se membro possui coletas
                 $responsabilidades = $membro->responsabilidades;
                 if(!empty($responsabilidades)){
 
                     foreach($responsabilidades as $responsabilidade){
-                        $responsabilidade->cod_lotacao = 0;
-                        $responsabilidade->cod_setor = 'nda';
+                        $responsabilidade->membro()->dissociate();
                         $responsabilidade->delete();
                     }
                 }

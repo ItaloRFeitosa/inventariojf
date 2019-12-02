@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Oracle\Sarh\ServPessoal;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Throwable;
 
 class Membro extends Model
 {
@@ -31,5 +32,40 @@ class Membro extends Model
             // Retorna null para evitar erros
             return null; 
         }
+    }
+
+    public function insertResponsabilidades($lotacoes){
+        try {
+            foreach($lotacoes as $lota_cod){
+                $responsabilidade = new Responsabilidade;
+                $responsabilidade->cod_lotacao = $lota_cod;
+                $responsabilidade->cod_setor = 'sem setor';//por enquanto
+                $responsabilidade->membro()->associate($this);
+                $responsabilidade->save();
+            }
+        } catch (\Throwable $th) {
+        }
+        
+
+    }
+
+    public function updateResponsabilidades($lotacoes){
+        try {
+            $responsabilidades = $this->responsabilidades;
+            if(!empty($responsabilidades)){
+
+                foreach($responsabilidades as $responsabilidade){
+                    $responsabilidade->membro()->dissociate();
+                    $responsabilidade->delete();
+                }
+            } 
+            if(!empty($lotacoes)){
+                $this->insertResponsabilidades($lotacoes);
+            }
+
+        } catch (Throwable $th) {
+        }
+
+        
     }
 }

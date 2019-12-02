@@ -18,7 +18,7 @@
           <table class="table">
             <tbody><tr>
               <th style="width: 10px">Check</th>
-              <th>Sigla</th>
+              <th style="width: 18%">Relativos</th>
               <th>Lotação</th>
               <th style="width: 40px">Coletas</th>
               <th style="width: 100px">Ações</th>
@@ -30,19 +30,23 @@
                                 <input type="checkbox">
                             </label>
                     </td>
-                    <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }}</td>
-                    <td>{{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
+                    <td>{{$responsabilidade->lotacao()->hierarquia()}}</td>
+                    <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }} - {{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
                     <td>
                         <span class="badge bg-light-blue">50/100</span>
                     </td>
                     <td>
-                        <a  type="button" class="btn" onclick="showDetalhes($responsabilidade)"
+                        {{-- <a  type="button" class="btn" onclick="showDetalhes($responsabilidade)"
                         id="btn-detalhe" value="" title="Detalhes">
                                 <i class="fa fa-eye text-info"></i>
+                        </a> --}}
+                        <a href="#" title="Tombos">
+                          <i class="fa fa-eye text-info"></i>
                         </a>
                         <a href="#" title="Coletas">
                             <i class="fas fa-archive"></i>
                         </a>
+                        
                     </td>
                 </tr>
             @endforeach
