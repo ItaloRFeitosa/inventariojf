@@ -19,19 +19,35 @@
         <div class="box-body no-padding">
           <table class="table">
             <tbody><tr>
+<<<<<<< HEAD
               <th>Sigla</th>
+=======
+              <th style="width: 10px">Check</th>
+              <th style="width: 18%">Relativos</th>
+>>>>>>> a188a02e538ee36ec3aa956b1512ac2a0ff395d4
               <th>Lotação</th>
               <th style="width: 100px">Coletas</th>
               <th style="width: 50px">Tombos</th>
             </tr>
             @foreach ($membro->responsabilidades()->paginate(5) as $responsabilidade)
                 <tr>
+<<<<<<< HEAD
                     <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }}</td>
                     <td>{{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
+=======
+                    <td>
+                            <label>
+                                <input type="checkbox">
+                            </label>
+                    </td>
+                    <td>{{$responsabilidade->lotacao()->hierarquia()}}</td>
+                    <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }} - {{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
+>>>>>>> a188a02e538ee36ec3aa956b1512ac2a0ff395d4
                     <td>
                         <span class="badge bg-light-blue">50/100</span>
                     </td>
                     <td>
+<<<<<<< HEAD
 
                         <div class="pull-right btn-group">
                         
@@ -40,6 +56,19 @@
     
                         </div>
 
+=======
+                        {{-- <a  type="button" class="btn" onclick="showDetalhes($responsabilidade)"
+                        id="btn-detalhe" value="" title="Detalhes">
+                                <i class="fa fa-eye text-info"></i>
+                        </a> --}}
+                        <a href="#" title="Tombos">
+                          <i class="fa fa-eye text-info"></i>
+                        </a>
+                        <a href="#" title="Coletas">
+                            <i class="fas fa-archive"></i>
+                        </a>
+                        
+>>>>>>> a188a02e538ee36ec3aa956b1512ac2a0ff395d4
                     </td>
                 </tr>
             @endforeach

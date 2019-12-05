@@ -48,9 +48,13 @@ class RhLotacao extends Model
         return $lotacoes;
     }
 
-    public function lotacoesPaiAte($nivel){
+    public function hierarquia($nivel = 3){
 
-        //hirarquia
+        if(($nivel == 0) || ($this->lotacaoPai()->lota_sigla_lotacao == '')){
+            return $this->lota_sigla_lotacao;
+        }
+        return $this->lotacaoPai()->hierarquia(($nivel-1)).'/'.$this->lota_sigla_lotacao;
+        
     }
 
 }

@@ -56,13 +56,7 @@ class MembroController extends Controller
         if ($membro) {
             if(!empty($dataform['responsabilidades'])){
                 
-                foreach($dataform['responsabilidades'] as $lota_cod){
-                    $responsabilidade = new Responsabilidade;
-                    $responsabilidade->id_membro = $membro->id;
-                    $responsabilidade->cod_lotacao = $lota_cod;
-                    $responsabilidade->cod_setor = 'sem setor';//por enquanto
-                    $responsabilidade->save();
-                }
+                $membro->insertResponsabilidades($dataform['responsabilidades']);
                 
             }
             return redirect()->back()->with('status', 'Membro Adicionado com Sucesso');
@@ -109,31 +103,19 @@ class MembroController extends Controller
     public function update(Request $request, Membro $membro)
     {
         $dataform = $request->all();
-        $responsabilidades = $membro->responsabilidades;
-        if(!empty($responsabilidades)){
 
-            foreach($responsabilidades as $responsabilidade){
-                $responsabilidade->cod_lotacao = 0;
-                $responsabilidade->cod_setor = 0;//por enquanto
-                $responsabilidade->delete();
-            }
-        }
-        if(!empty($dataform['responsabilidades'])){   
-                foreach($dataform['responsabilidades'] as $lota_cod){
-                    $responsabilidade = new Responsabilidade;
-                    $responsabilidade->id_membro = $membro->id;
-                    $responsabilidade->cod_lotacao = $lota_cod;
-                    $responsabilidade->cod_setor = 'sem setor';//por enquanto
-                    $responsabilidade->save();
-                }
-        }
+        
+        $membro->updateResponsabilidades($dataform['responsabilidades']);
+  
 
         if($membro->update($dataform)){
-
-            return redirect()->route('inventario.membros.index', $membro->inventario)->with('status', 'Membro Atualizado com Sucesso');
-        }
-        
+                return redirect()->route('inventario.membros.index', $membro->inventario)->with('status', 'Membro Atualizado com Sucesso');
+            }
     }
+        
+
+        
+    
     
 
     /**
@@ -144,6 +126,35 @@ class MembroController extends Controller
      */
     public function destroy(Membro $membro)
     {
-        dd($membro);
+        try {
+            $inventario = $membro->inventario;
+            if(true){// todo: teste se membro possui coletas
+                $responsabilidades = $membro->responsabilidades;
+                if(!empty($responsabilidades)){
+
+                    foreach($responsabilidades as $responsabilidade){
+                        $responsabilidade->membro()->dissociate();
+                        $responsabilidade->delete();
+                    }
+                }
+                if($membro->delete()) {
+                    return redirect()->route('inventario.membros.index', $inventario)->with('status', 'Membro Excluído com Sucesso!');
+                } else {
+                    return redirect()->route('inventario.membros.index', $inventario)->with('warning', 'Exclusão Falhou!');
+                }
+            } else {
+                return redirect()->route('inventario.membros.index', $inventario)->with('warning', 'Exclusão Falhou! - Inventário já foi iniciado!');
+            }
+        } catch(ModelNotFoundException $e) {
+            return redirect()->route('inventario.membros.index', $inventario)
+                                ->withErrors('O Membro pode te sido apagado durante esta operação de exclusão!')->withInput();
+        } catch(Throwable $e) {
+            if($e->getCode() == 23000 ){
+
+                return redirect()->back()->with('warning', 'Exclusão não permitida, Membro possui membros e coletas!');
+            } else {
+                return redirect()->route('inventario.membros.index', $inventario)->with('warning', 'Erro desconhecido: ' + $e->getMessage());
+            }
+        }
     }
 }

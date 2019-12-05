@@ -3,8 +3,13 @@
         <tr>
             <th>Matrícula</th>
             <th>Nome</th>         
+<<<<<<< HEAD
             <th style="width: 50%">Lotação Responsavel</th>
             <th>Opções</th>
+=======
+            <th style="width: 60%">Lotação Responsável</th>
+            <th>Ações</th>
+>>>>>>> a188a02e538ee36ec3aa956b1512ac2a0ff395d4
         </tr>
     </thead>
     
@@ -28,7 +33,8 @@
             
             <td>
             @foreach ($membro->responsabilidades as $resp)
-                {{$resp->lotacao()->lota_sigla_lotacao}}&nbsp;&nbsp;
+            <span class="label label-primary">{{$resp->lotacao()->hierarquia(2)}}</span>&nbsp;&nbsp;
+                
             @endforeach
             </td>
             

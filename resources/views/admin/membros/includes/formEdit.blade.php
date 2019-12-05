@@ -102,17 +102,21 @@
 
                                 
                         <div class="col-md-2">
+<<<<<<< HEAD
                             <button form='formDelete' class="btn btn-danger" type=submit onclick="return confirm('Tem certeza que deseja deletar este Membro?')"><i class="far fa-trash-alt" aria-hidden="true" ></i> Excluir</button>
+=======
+                            <button form='formDelete' class="btn btn-md btn-danger" type=submit onclick="return confirm('Tem certeza que deseja deletar este Membro?')"><i class="fa fa-times" aria-hidden="true" ></i> Excluir</button>
+>>>>>>> a188a02e538ee36ec3aa956b1512ac2a0ff395d4
 
                         </div>
                         <div class="col-md-6">
 
                         </div>
                         <div class="col-md-2">
-                            <a href='{{route('inventario.membros.index', $membro->inventario)}}' class="btn btn-default btn-block" type="reset"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>
+                            <a href='{{route('inventario.membros.index', $membro->inventario)}}' class="btn btn-md btn-default btn-block" type="reset"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>
                         </div>
                         <div class="col-md-2">
-                            <button form='formUpdate' class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
+                            <button form='formUpdate' class="btn btn-md btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
                         </div>
                 
                 

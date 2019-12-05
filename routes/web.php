@@ -39,6 +39,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
     Route::resource('inventarios', 'InventarioController');
     Route::resource('membros', 'MembroController');
+    Route::resource('responsabilidades', 'ResponsabilidadeController');
 
     Route::prefix('inventarios')->group(function () {
         
