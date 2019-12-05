@@ -4,13 +4,16 @@
 
 @section('content_header')
 
-<h1><i class="fas fa-users"></i> Comissão - {{$inventario->name}}</h1>
+<h1>
 
-<ol class="breadcrumb">
-        <a href="{{route('inventarios.show', $inventario )}}" class="btn btn-block btn-default">
-                <i class="fas fa-arrow-circle-left"></i> Voltar
-        </a>
-</ol>
+    <a class="btn-default"  title="Voltar" href="{{route('inventarios.show', $inventario )}}" >
+        <i class="fas fa-chevron-circle-left"></i> 
+    </a>
+
+    <i class="fas fa-users"></i> Comissão - {{$inventario->name}}
+
+</h1>
+
 <br>
 @stop
 

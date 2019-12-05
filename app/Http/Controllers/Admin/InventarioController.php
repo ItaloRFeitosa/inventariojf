@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Inventario\InventarioFormRequest;
 use App\Http\Requests\Admin\Inventario\UpdateInventarioFormRequest;
+use App\Http\Controllers\Admin\MembroController;
 use App\Models\Inventario;
 use App\Models\Oracle\Sarh\ServPessoal;
 use App\Models\Oracle\Sarh\Localidade;
@@ -12,6 +13,7 @@ use Exception;
 use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Request;
 use App\Services\CriadorDeInventario;
+use App\Services\CriadorDeMembro;
 use Throwable;
 
 
@@ -40,8 +42,9 @@ class InventarioController extends Controller
     public function create(CriadorDeInventario $criadorDeInventario)
     {
         $localidades = Localidade::localidades();
+        $servidores = ServPessoal::ativos()->get();
         $valoresPadrao = $criadorDeInventario->valoresPadrao($localidades);
-        return view('admin.inventarios.create', compact('localidades','valoresPadrao'));
+        return view('admin.inventarios.create', compact('localidades','servidores','valoresPadrao'));
 
     }
 
@@ -53,10 +56,11 @@ class InventarioController extends Controller
      */
     public function store(
         InventarioFormRequest $request,
-        CriadorDeInventario $criadorDeInventario)
+        CriadorDeInventario $criadorDeInventario,
+        CriadorDeMembro $criadorDeMembro)
     {
-
         $criado_por = 'MA375VO';
+        $flag_adm = '1';
 
         $inventario =  $criadorDeInventario->criarInventario(
             $request->name,
@@ -68,6 +72,13 @@ class InventarioController extends Controller
             $criado_por,
             $request->obs
         );
+
+        $criadorDeMembro->criarMembro(
+            $inventario,
+            $request->nu_matr_servidor,
+            $flag_adm
+        );
+
 
         $request->session()
             ->flash('status',"O inventario {$inventario->name} do ano de {$inventario->ano} foi criado com sucesso");

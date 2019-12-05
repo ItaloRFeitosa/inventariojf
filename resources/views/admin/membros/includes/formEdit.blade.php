@@ -3,7 +3,7 @@
         <div class="box-header">
                 <h3 class="box-title" style="display: inline-block">Editar Membro</h3>
                 
-
+            
         </div>
         <div class="box-body">
             <form id = "formDelete" class="delete" method="POST" action="{{route('membros.destroy', $membro)}}">
@@ -26,31 +26,38 @@
                             </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                             <div class="form-group">
                                     <label for="nu_matr_servidor">Nome</label>
                                     <input type="text" class='form-control' disabled value="{{$membro->servPessoal()->no_servidor}}"></td>  
                             </div>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                             <div class="form-group">
-                                    <label for="flag_adm">Privilégios:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
+                                    <label for="flag_adm">
                                             <i class="fas fa-users-cog"></i>
-                                        </div>
-                                            <select  name='flag_adm' id="flag_adm" class="form-control">
-                                                        @if ($membro->flag_adm)
-                                                            <option value=1 selected>Sim</option>
-                                                            <option value=0 >Não</option>
-                                                        @else
-                                                            <option value=1 >Sim</option>
-                                                            <option value=0 selected>Não</option>
-                                                        @endif
-                                                        
-                                            </select>
-                                    </div>    
+                                            Funções Administrativas
+                                            @if($membro->flag_adm)
+                                                <span class="label label-success">ATIVO</span>
+                                            @else
+                                                <span class="label label-default">DESATIVADO</span>
+                                            @endif
+                                    </label>
+                                         
+                                    <div class="checkbox">
+                                            
+                                        <label>
+                                        @if($membro->flag_adm)
+                                            <input type="checkbox" id="flag_adm" name="flag_adm" value=0>
+                                            Desabilitar
+                                        @else
+                                            <input type="checkbox" id="flag_adm" name="flag_adm" value=1>
+                                            Habilitar
+                                        @endif
+
+                                        </label>
+                                    </div>   
                             </div>
                     </div>
                 </div>
@@ -95,7 +102,7 @@
 
                                 
                         <div class="col-md-2">
-                            <button form='formDelete' class="btn btn-danger" type=submit onclick="return confirm('Tem certeza que deseja deletar este Membro?')"><i class="fa fa-times" aria-hidden="true" ></i> Excluir</button>
+                            <button form='formDelete' class="btn btn-danger" type=submit onclick="return confirm('Tem certeza que deseja deletar este Membro?')"><i class="far fa-trash-alt" aria-hidden="true" ></i> Excluir</button>
 
                         </div>
                         <div class="col-md-6">
@@ -137,6 +144,7 @@
         }
         );
     });
+
     
 </script>
 @endpush

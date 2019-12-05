@@ -21,11 +21,16 @@
     <div class="box-header with-border">
         <h3 class="box-title" style="display: inline-block">Informações do Inventário</h3>
 
-        @if($inventario->isAtivo())
-        <span class="label label-info pull-right">Ativo</span>
-        
-        @else
-        <span class="label label-success pull-right">Finalizado</span>
+        @if($inventario->isAtivo() && $inventario->isPosColeta())
+            <a href="{{route('inventarios.finalizar', $inventario->id)}}" class="btn btn-warning btn-sm pull-right" 
+                    onclick="return confirm('Deseja realmente finalizar o inventario?');">
+                    <i class="fas fa-stop"></i> Finalizar
+            </a>
+        @elseif(!$inventario->isAtivo())
+            <a href="{{route('inventarios.reativar', $inventario->id)}}" class="btn btn-primary btn-sm pull-right"  
+                    onclick="return confirm('Deseja realmente reativar o inventario?');">
+                    <i class="fas fa-play"></i> Reativar
+            </a>
         @endif
         
     </div>
@@ -106,14 +111,27 @@
             {{method_field('DELETE')}}
     </form>
         <div class="box-footer">
+            @if($inventario->isAtivo())
             <a href="#" class="btn btn-sm btn-warning pull-right toggle" id="btn-editar"><i class="fas fa-edit"></i> Editar Informações</a>
-            
-            <button form = "formDelete" type=submit href="" class="btn btn-sm btn-danger pull-right toggle" onclick="return confirm('Tem certeza que deseja deletar este Inventário?')" style="display:none"><i class="fas fa-trash-alt"></i> Excluir Inventário</button>
-            @if ($inventario->isAtivo())      
-            <button form = "formUpdate" type=submit href="" class="btn btn-sm btn-success pull-left toggle" style="display:none"><i class="fas fa-save"></i> Salvar</button>
+            @else
+            <button form = "formDelete" type=submit href="" class="btn btn-sm btn-danger pull-left toggle" onclick="return confirm('Tem certeza que deseja deletar este Inventário?')"><i class="far fa-trash-alt"></i> Excluir Inventário</button>
             @endif
             
-            <a href="#" class="btn btn-sm btn-default pull-left toggle" id="btn-cancelar" style="display:none"> Cancelar</a>
+            <div class="box-body">
+
+                <button form = "formDelete" type=submit href="" class="btn btn-sm btn-danger pull-left toggle" onclick="return confirm('Tem certeza que deseja deletar este Inventário?')" style="display:none"><i class="far fa-trash-alt"></i> Excluir Inventário</button>
+            
+            <div class="pull-right">
+
+                <a href="#" class="btn btn-sm btn-default toggle" id="btn-cancelar" style="display:none"> Cancelar</a>
+
+                @if ($inventario->isAtivo())      
+                <button form = "formUpdate" type=submit href="" class="btn btn-sm btn-success toggle" style="display:none"><i class="fas fa-save"></i> Salvar</button>
+                @endif
+                   
+            </div>
+            </div>
+
         </div>
     
 </div>

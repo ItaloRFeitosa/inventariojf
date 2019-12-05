@@ -3,27 +3,40 @@
 @section('title', 'Inventar SJMA - Detalhes')
 
 @section('content_header')
-<h1><i class="fas fa-boxes"></i> {{$inventario->name}}</h1>
 
-    <ol class="breadcrumb">
-        @if($inventario->isColetaAtiva())
-            <button type="button" class="btn btn-block btn-info disabled">
-                    <i class="fas fa-hourglass-half"></i> Em Coleta
-            </button>
-        @elseif($inventario->isPosColeta())
-            <a href="{{route('inventarios.finalizar', $inventario->id)}}" class="btn btn-block btn-warning" 
-                onclick="return confirm('Deseja realmente finalizar o inventario?');">
-                <i class="fas fa-stop"></i> Finalizar
-            </a>
-        @elseif(!$inventario->isAtivo())
-            <a href="{{route('inventarios.reativar', $inventario->id)}}" class="btn btn-block btn-default"  
-                onclick="return confirm('Deseja realmente reativar o inventario?');">
-                <i class="fas fa-play"></i> Reativar
-            </a>
-        @endif
-    </ol>
+<h1>
     
-<br>
+    <a class="btn-default"  title="Voltar" href="{{route('inventarios.index')}}" >
+        <i class="fas fa-chevron-circle-left"></i> 
+    </a>
+    
+    <i class="fas fa-boxes"></i> {{$inventario->name}}
+
+
+    <div class="pull-right">
+        @if($inventario->isPreColeta())
+            <p class="btn btn-block btn-info disabled">
+                    <i class="far fa-hourglass"></i> Pré Coleta
+            </p>
+        @elseif($inventario->isColetaAtiva())
+            <p class="btn btn-block btn-info disabled">
+                    <i class="fas fa-hourglass"></i> Em Coleta
+            </p>
+        @elseif($inventario->isPosColeta())
+            <p class="btn btn-block btn-warning disabled">
+                    <i class="fas fa-hourglass"></i> Coleta Finalizada
+            </p>
+        @elseif(!$inventario->isAtivo())
+            <p class="btn btn-block btn-success disabled">
+                    <i class="fas fa-check"></i> Inventario Finalizado
+            </p>
+        @endif
+    </div>
+
+</h1>
+
+</br>
+
 @stop
 
 @section('content')

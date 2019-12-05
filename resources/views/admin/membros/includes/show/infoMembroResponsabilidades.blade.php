@@ -7,42 +7,39 @@
             @endif
         <div class="box-header">
           <h3 class="box-title">Responsabilidades</h3>
+
           @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
-            <a href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Editar">
-                  <i class="pull-right fa fa-edit text-warning"></i>
+              <a type="button" class="pull-right btn btn-default" href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Editar Responsabilidades">
+                  <i class="fas fa-edit"></i></a>&nbsp;&nbsp;
           @endif
+
         </a>
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <table class="table">
             <tbody><tr>
-              <th style="width: 10px">Check</th>
               <th>Sigla</th>
               <th>Lotação</th>
-              <th style="width: 40px">Coletas</th>
-              <th style="width: 100px">Ações</th>
+              <th style="width: 100px">Coletas</th>
+              <th style="width: 50px">Tombos</th>
             </tr>
             @foreach ($membro->responsabilidades()->paginate(5) as $responsabilidade)
                 <tr>
-                    <td>
-                            <label>
-                                <input type="checkbox">
-                            </label>
-                    </td>
                     <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }}</td>
                     <td>{{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
                     <td>
                         <span class="badge bg-light-blue">50/100</span>
                     </td>
                     <td>
-                        <a  type="button" class="btn" onclick="showDetalhes($responsabilidade)"
-                        id="btn-detalhe" value="" title="Detalhes">
-                                <i class="fa fa-eye text-info"></i>
-                        </a>
-                        <a href="#" title="Coletas">
-                            <i class="fas fa-archive"></i>
-                        </a>
+
+                        <div class="pull-right btn-group">
+                        
+                            <a type="button" class="btn btn-default" href="#" title="Visualizar Tombos">
+                                <i class="fas fa-qrcode"></i></a>&nbsp;&nbsp;
+    
+                        </div>
+
                     </td>
                 </tr>
             @endforeach

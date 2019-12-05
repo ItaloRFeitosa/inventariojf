@@ -6,7 +6,7 @@
 
             @yield('responsabilidades_header')
             
-            <th>Ações</th>
+            <th class="text-center">Opções</th>
         </tr>
     </thead>
     <tbody>
@@ -29,13 +29,20 @@
 
                 @yield('responsabilidades_body')
 
-                <td style="width: 70px">
-                        <a href="{{route('inventario.membros.show', [$membro->inventario, $membro])}}" title="Click para ver.">
-                            <i class="fa fa-eye text-info"></i></a>&nbsp;&nbsp;
+                <td style="width: 150px">
+
+                        <div class="pull-right btn-group">
+                        
+                        <a type="button" class="btn btn-default" href="{{route('inventario.membros.show', [$membro->inventario, $membro])}}" title="Atividades do membro">
+                            <i class="fas fa-eye"></i></a>&nbsp;&nbsp;
+
                         @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
-                        <a href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Click para editar.">
-                            <i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;
+                        <a type="button" class="btn btn-default" href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Editar Responsabilidades/Excluir Membro">
+                            <i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                         @endif
+
+                        </div>
+    
                 </td>
             </tr>
         @empty

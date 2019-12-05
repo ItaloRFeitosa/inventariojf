@@ -3,8 +3,8 @@
         <tr>
             <th>Matrícula</th>
             <th>Nome</th>         
-            <th style="width: 50%">Lotacao Responsavel</th>
-            <th>Ações</th>
+            <th style="width: 50%">Lotação Responsavel</th>
+            <th>Opções</th>
         </tr>
     </thead>
     
@@ -20,7 +20,7 @@
             
             <td>{{$membro->servPessoal()->no_servidor}}&nbsp;
                 @if ($membro->flag_adm == 1)
-                <span class="label label-success">Adm</span>
+                <span class="label label-success">ADM</span>
                 @endif
             </td>
             
@@ -32,11 +32,23 @@
             @endforeach
             </td>
             
-            <td style="width: 70px">
-                <a href='{{route('inventario.membros.show', [$membro->inventario, $membro])}}' title="Click para ver."><i class="fa fa-eye text-info"></i></a>&nbsp;&nbsp;
-                @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
-                    <a href='{{route('inventario.membro.edit', [$inventario, $membro])}}' title="Click para editar."><i class="fa fa-edit text-warning"></i></a>&nbsp;&nbsp;
-                @endif
+            <td style="width: 150px">
+
+                <div class="btn-group">
+                    
+                    <a type="button" class="btn btn-default" href="{{route('inventario.membros.show', [$membro->inventario, $membro])}}" title="Atividades do membro">
+                        <i class="fas fa-eye"></i></a>&nbsp;&nbsp;
+
+                    @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
+                    <a type="button" class="btn btn-default" href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Editar responsabilidades e privilegios">
+                        <i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                    <a form='formDelete' class="btn btn-danger" type=submit onclick="return confirm('Tem certeza que deseja deletar este Membro?')" title="Excluir membro">
+                        <i class="far fa-trash-alt" aria-hidden="true" ></i></a>
+                    @endif
+
+                </div>
+
+                
             </td>
         </tr>
 
