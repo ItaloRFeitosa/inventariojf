@@ -6,7 +6,7 @@
 
 <h1>
 
-    <a class="btn-default"  title="Voltar" href="{{route('inventarios.show', $inventario )}}" >
+    <a class="btn-default"  title="Voltar" href="{{route('inventario.membros.index',$membro->inventario)}}" >
         <i class="fas fa-chevron-circle-left"></i> 
     </a>
 
@@ -32,13 +32,13 @@
 
 <div class="row">
     <div class="col-md-12">
-        @include('admin.membros.includes.formEdit', compact('lotacoes', 'membro'))
+        @include('admin.membros.includes.formEdit', compact('membro'))
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12">
-            @include('admin.membros.includes.index.tableResponsabilidades', compact('membro'))
+            @include('admin.membros.includes.index.tableResponsabilidades', compact('lotacoes','membro'))
     </div>
 </div>
 

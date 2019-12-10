@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Responsabilidade;
+use App\Models\Oracle\Sarh\RhLotacao;
 
 class ResponsabilidadeController extends Controller
 {
@@ -25,7 +26,8 @@ class ResponsabilidadeController extends Controller
      */
     public function create()
     {
-        //
+        $lotacoes = RhLotacao::paisEFilhas();
+        return view('admin.membros.inventarioMembrosEdit', compact('lotacoes'));
     }
 
     /**
@@ -36,7 +38,21 @@ class ResponsabilidadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataform = $request->all();
+        $lotacoes = $dataform['responsabilidades'];
+       
+        foreach($lotacoes as $lota_cod){
+            $responsabilidade = new Responsabilidade;
+            $responsabilidade->cod_lotacao = $lota_cod;
+            $responsabilidade->cod_setor = 'sem setor';//por enquanto
+            $responsabilidade->id_membro = $dataform['id_membro'];
+            $responsabilidade->save();
+        }
+
+        $request->session()
+            ->flash('status',"Responsabilidade foi adicionada com sucesso com sucesso");
+    
+        return redirect()->route('inventario.membro.edit', [$responsabilidade->membro->inventario, $responsabilidade->membro] );
     }
 
     /**
