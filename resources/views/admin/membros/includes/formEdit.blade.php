@@ -66,7 +66,7 @@
                                                    @foreach ($membro->responsabilidades as $resp )
                                                     <option selected value="{{$resp->cod_lotacao}}">
                                                             {{ $resp->lotacao()->lota_cod_lotacao }} -
-                                                            {{ $resp->lotacao()->lota_sigla_lotacao }} - 
+                                                            {{ $resp->lotacao()->hierarquia(1) }} - 
                                                             {{ $resp->lotacao()->lota_dsc_lotacao }}
                                                     </option>
                                                    @endforeach
@@ -78,7 +78,7 @@
                                                     
                                                             <option value="{{ $filho->lota_cod_lotacao }}">
                                                                     {{ $filho->lota_cod_lotacao }} -
-                                                                    {{ $filho->lota_sigla_lotacao }} - 
+                                                                    {{ $filho->hierarquia(1) }} - 
                                                                     {{ $filho->lota_dsc_lotacao }}
                                                             </option>
                                                           

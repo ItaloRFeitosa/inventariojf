@@ -4,7 +4,10 @@ namespace App\Models\Oracle\Sarh;
 
 use App\Models\Oracle\Sicam\PatrimonioSetor;        
 use App\Models\Oracle\Sicam\Termo;        
+use App\Models\Oracle\Sicam\Tombo;        
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RhLotacao extends Model
 {
@@ -16,8 +19,43 @@ class RhLotacao extends Model
 
     protected $guarded = [];
 
-    public function termos(){
-        return Termo::where('CO_LOTA', $this->lota_cod_lotacao);
+    public function tombos(){
+        $lotacoes = RhLotaTraducao::where('LOTR_LOTA_COD_LOTACAO', $this->lota_cod_lotacao)->get()->map(function($lotacao){
+            return $lotacao->lotr_co_antigo_lotacao;
+        });
+        
+        $tombos = Tombo::join('termo', function($join){
+                                $join->on('TOMBO.AN_TERMO', 'TERMO.AN_TERMO')
+                                ->on('TOMBO.NU_TERMO', 'TERMO.NU_TERMO');
+                            })
+                                ->select('tombo.*')
+                                ->whereIn('TERMO.CO_LOTA', $lotacoes)
+                                ->where('TI_TOMBO', '=', 'T')
+                                ->paginate(12);
+        
+        return $tombos;
+    }
+
+    public function hasTombos(){
+
+        try {
+            $lotacoes = RhLotaTraducao::where('LOTR_LOTA_COD_LOTACAO', $this->lota_cod_lotacao)->get()->map(function($lotacao){
+                return $lotacao->lotr_co_antigo_lotacao;
+            });
+            
+            $tombos = Termo::join('TOMBO', function($join){
+                                    $join->on('TOMBO.AN_TERMO', 'TERMO.AN_TERMO')
+                                    ->on('TOMBO.NU_TERMO', 'TERMO.NU_TERMO')
+                                    ->where('TI_TOMBO', '=', 'T');
+                                })
+                                    ->whereIn('TERMO.CO_LOTA', $lotacoes)
+                                    ->firstOrFail();
+            
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+
     }
 
 
@@ -38,19 +76,26 @@ class RhLotacao extends Model
     }
 
     public static function paisEFilhas(){
-        $lotacoes = RhLotacao::where('LOTA_DAT_FIM', NULL)->get();
+        $lotacoes = static::all();
         $lotacoes = $lotacoes->mapToGroups(function($lotacao, $key){
             //dd($lotacao->lotacaoPai()['lota_sigla_lotacao']);
-            $pai = $lotacao->lotacaoPai();
-            return [($pai['lota_cod_lotacao'].' - '.$pai['lota_sigla_lotacao'].' - '.$pai['lota_dsc_lotacao']) => $lotacao];
-            
+            if($lotacao->hasTombos()){
+                $pai = $lotacao->lotacaoPai();
+                return [($pai['lota_cod_lotacao'].' - '.$pai->hierarquia(2).' - '.$pai['lota_dsc_lotacao']) => $lotacao];
+            }
+            else{
+                return ['semtombos' => $lotacao];
+            }
+        })->reject(function ($value, $key){
+            return $key == 'semtombos';
         });
+        //dd($lotacoes);
         return $lotacoes;
     }
 
     public function hierarquia($nivel = 3){
 
-        if(($nivel == 0) || ($this->lotacaoPai()->lota_sigla_lotacao == '')){
+        if(($nivel == 0) || (empty($this->lotacaoPai()))){
             return $this->lota_sigla_lotacao;
         }
         return $this->lotacaoPai()->hierarquia(($nivel-1)).'/'.$this->lota_sigla_lotacao;

@@ -51,12 +51,13 @@
                                             </div>
                                                 <select  name='responsabilidades[]' id="responsabilidades" class="form-control" multiple='multiple'>
                                                    @foreach ($lotacoes as $chave => $lotacao)
+                                                   
                                                        <optgroup label="{{$chave}}">
                                                    
                                                     @foreach ($lotacao as $filho)
                                                             <option value="{{ $filho->lota_cod_lotacao }}">
                                                                     {{ $filho->lota_cod_lotacao }} -
-                                                                    {{ $filho->lota_sigla_lotacao }} - 
+                                                                    {{ $filho->hierarquia(1) }} - 
                                                                     {{ $filho->lota_dsc_lotacao }}
                                                             </option>
                                                           

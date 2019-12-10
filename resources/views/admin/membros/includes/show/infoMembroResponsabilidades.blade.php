@@ -30,7 +30,7 @@
                                 <input type="checkbox">
                             </label>
                     </td>
-                    <td>{{$responsabilidade->lotacao()->hierarquia()}}</td>
+                    <td>{{$responsabilidade->lotacao()->hierarquia(2)}}</td>
                     <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }} - {{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
                     <td>
                         <span class="badge bg-light-blue">50/100</span>
@@ -40,7 +40,7 @@
                         id="btn-detalhe" value="" title="Detalhes">
                                 <i class="fa fa-eye text-info"></i>
                         </a> --}}
-                        <a href="#" title="Tombos">
+                      <a href="{{route('responsabilidades.show', $responsabilidade)}}" title="Tombos">
                           <i class="fa fa-eye text-info"></i>
                         </a>
                         <a href="#" title="Coletas">
