@@ -16,16 +16,24 @@ class Termo extends Model
 
     protected $guarded = [];
 
+    protected $dates = [
+        'dt_termo',
+    ];
 
     // Retorna todos os tombos referentes ao termo
     public function tombos(){
-        return Tombo::where('NU_TERMO', $this->nu_termo)->where('AN_TERMO',$this->an_termo)->paginate();
+        return Tombo::where('NU_TERMO', $this->nu_termo)->where('AN_TERMO',$this->an_termo)->get();
     }
 
 
     // Retorna model do servidor respnsavel pelo termo
     public function servidorResponsavel(){
-        return ServPessoal::where('NU_MATR_SERVIDOR', $this->nu_matr_resp_tombo)->first();
+        try {
+            //code...
+            return ServPessoal::where('NU_MATR_SERVIDOR', $this->nu_matr_resp_tombo)->firstOrFail();
+        } catch (\Throwable $th) {
+            return null;
+        }
     }
 
 

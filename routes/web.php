@@ -11,6 +11,7 @@
 |
 */
 
+use App\Models\Oracle\Sarh\RhLotacao;
 use App\Http\Controllers\Admin\MembroController;
 use App\Models\Oracle\Sicam\Material;
 use App\Models\Oracle\Sicam\Tombo;
@@ -24,10 +25,12 @@ Route::get('/oracleTeste', function () {
     //                         ->where([['SICAM.TOMBO.NU_TOMBO', '=', 18835], ['SICAM.TOMBO.TI_TOMBO', '=', 'T'], ['SICAM.TERMO.AN_TERMO', '=', '2019']])
     //                         ->get()); 5235013016
     //$material = Material::where('co_mat',5235013016)->first();
-    $tombo = Tombo::where([['nu_tombo',18835],['ti_tombo','T']])->first();
-    dd($tombo->termo());
+    //$tombo = Tombo::where([['nu_tombo',18835],['ti_tombo','T']])->first();
+    //dd($tombo->termo());
     //dd($tombo->termo()->first()->tombos()->paginate(10));
-    
+    //$relatorio = RhLotacao::find(391)->listaTombos();
+    //dd($relatorio[0]->chunk(10));
+
     
 });
 

@@ -46,7 +46,7 @@
                                     <span class="input-group-btn">
                                         <button class="btn btn-success " form='addResponsabilidade' type="submit">
                                             <i class="fas fa-plus" aria-hidden="true"></i>
-                                        </button>
+                                        </button> 
                                     </span> 
 
                               </div>           
