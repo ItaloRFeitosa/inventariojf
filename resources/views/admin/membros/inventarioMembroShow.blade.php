@@ -3,32 +3,45 @@
 @section('title', 'Inventar SJMA - Membro')
 
 @section('content_header')
-<h1><i class="fas fa-boxes"></i> {{$inventario->name}} - {{$membro->servPessoal()->no_servidor}}
+
+<h1>
+
+    <a class="btn-default"  title="Voltar" href="{{route('inventarios.show', [$membro->inventario, $membro])}}" >
+        <i class="fas fa-chevron-circle-left"></i> 
+    </a>
+    
+    <i class="fas fa-user"></i> {{$inventario->name}} - {{$membro->servPessoal()->no_servidor}}
+    
     @if($membro->flag_adm)
     <span class="label label-success">ADM</span>
     @endif
-</h1>
 
-    <ol class="breadcrumb">
-        
+    <div class="pull-right">   
         @if($inventario->isAtivo())
-            @if($inventario->isColetaAtiva())
-                <a href="{{route('inventarios.show',$inventario )}}" class="btn btn-block btn-info">
-                    <i class="fas fa-hourglass-half"></i> Em Coleta
-                </a>
+            @if($inventario->isPreColeta())
+                <p class="btn btn-block btn-info disabled">
+                        <i class="far fa-hourglass"></i> Pré Coleta
+                </p>
+            @elseif($inventario->isColetaAtiva())
+                <p class="btn btn-block btn-info disabled">
+                        <i class="fas fa-hourglass-half"></i> Em Coleta
+                </p>
             @elseif($inventario->isPosColeta())
-                <a href="{{route('inventarios.show',$inventario )}}" class="btn btn-block btn-warning">
-                    <i class="fas fa-hourglass"></i> Coleta Finalizada
-                </a>
+                <p class="btn btn-block btn-warning disabled">
+                        <i class="fas fa-hourglass"></i> Coleta Finalizada
+                </p>
             @endif
         @elseif(!$inventario->isAtivo())
-            <a href="{{route('inventarios.show',$inventario )}}" class="btn btn-block btn-success">
-                <i class="fas fa-check"></i> Inventario Finalizado
-            </a>
+                <p class="btn btn-block btn-success disabled">
+                        <i class="fas fa-check"></i> Inventario Finalizado
+                </p>
         @endif
-    </ol>
-    
-<br>
+    </div>
+
+</h1>
+
+</br>
+
 @stop
 
 @section('content')

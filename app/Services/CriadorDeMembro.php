@@ -3,11 +3,12 @@
 namespace App\Services;
 
 use App\Models\Membro;
+use App\Models\Inventario;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Boolean;
 use phpDocumentor\Reflection\Types\String_;
 
-class MembroRepository
+class CriadorDeMembro
 {
     public function criarMembro(
         Inventario $inventario,

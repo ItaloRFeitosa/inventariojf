@@ -1,15 +1,18 @@
-
-<div class="box box-success">
+@if($membro->inventario->isAtivo())
+<div class="box box-info">
+@else
+<div class="box box-sucesse">
+@endif
         <div class="box-header">
-                <h3 class="box-title" style="display: inline-block">Editar Membro</h3>
-                
-
+                <h3 class="box-title" style="display: inline-block">Informações do Membro</h3>
+        
+        @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
+        <a type="button" class="pull-right btn btn-default" href="{{route('inventario.membros.show', [$membro->inventario, $membro])}}" title="Clique para ver">
+            <i class="fas fa-eye"></i> Ativades do membro</a>&nbsp;&nbsp;
+        @endif
+            
         </div>
         <div class="box-body">
-            <form id = "formDelete" class="delete" method="POST" action="{{route('membros.destroy', $membro)}}">
-                        {{csrf_field()}}
-                        {{method_field('DELETE')}}
-            </form>
             <form method="POST" id = "formUpdate" action="{{route('membros.update', $membro)}}">
                 {{csrf_field()}}
                 {{method_field('PUT')}}
@@ -26,33 +29,14 @@
                             </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                             <div class="form-group">
                                     <label for="nu_matr_servidor">Nome</label>
                                     <input type="text" class='form-control' disabled value="{{$membro->servPessoal()->no_servidor}}"></td>  
                             </div>
                     </div>
 
-                    <div class="col-md-2">
-                            <div class="form-group">
-                                    <label for="flag_adm">Privilégios:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fas fa-users-cog"></i>
-                                        </div>
-                                            <select  name='flag_adm' id="flag_adm" class="form-control">
-                                                        @if ($membro->flag_adm)
-                                                            <option value=1 selected>Sim</option>
-                                                            <option value=0 >Não</option>
-                                                        @else
-                                                            <option value=1 >Sim</option>
-                                                            <option value=0 selected>Não</option>
-                                                        @endif
-                                                        
-                                            </select>
-                                    </div>    
-                            </div>
-                    </div>
+                    
                 </div>
                 <div class="row">
                         <div class="col-md-12">
@@ -60,16 +44,10 @@
                                         <label for="responsabilidades">Lotações a ser responsável:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
-                                                <i class="fas fa-map-marker"></i>
+                                                <i class="fa fa-fw fa-sitemap"></i>
                                             </div>
                                                 <select  name='responsabilidades[]' id="responsabilidades" class="form-control" multiple='multiple'>
-                                                   @foreach ($membro->responsabilidades as $resp )
-                                                    <option selected value="{{$resp->cod_lotacao}}">
-                                                            {{ $resp->lotacao()->lota_cod_lotacao }} -
-                                                            {{ $resp->lotacao()->hierarquia(1) }} - 
-                                                            {{ $resp->lotacao()->lota_dsc_lotacao }}
-                                                    </option>
-                                                   @endforeach
+                                                   
                                                    
                                                     @foreach ($lotacoes as $chave => $lotacao)
                                                        <optgroup label="{{$chave}}">
@@ -93,19 +71,14 @@
             </form>
                     <div class="row">
 
-                                
-                        <div class="col-md-2">
-                            <button form='formDelete' class="btn btn-md btn-danger" type=submit onclick="return confirm('Tem certeza que deseja deletar este Membro?')"><i class="fa fa-times" aria-hidden="true" ></i> Excluir</button>
-
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
 
                         </div>
                         <div class="col-md-2">
                             <a href='{{route('inventario.membros.index', $membro->inventario)}}' class="btn btn-md btn-default btn-block" type="reset"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>
                         </div>
                         <div class="col-md-2">
-                            <button form='formUpdate' class="btn btn-md btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
+                            <button form='formUpdate' class="btn btn-md btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Adicionar</button>
                         </div>
                 
                 
@@ -137,6 +110,7 @@
         }
         );
     });
+
     
 </script>
 @endpush

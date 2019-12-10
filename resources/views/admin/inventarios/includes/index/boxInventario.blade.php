@@ -1,9 +1,5 @@
-@if($inventario->isColetaAtiva())
+@if($inventario->isAtivo())
 <div class="small-box bg-aqua">
-@elseif($inventario->isPreColeta())
-<div class="small-box bg-aqua">
-@elseif($inventario->isPosColeta())
-<div class="small-box bg-yellow">
 @else
 <div class="small-box bg-green">
 @endif
@@ -31,6 +27,7 @@
         @elseif($inventario->isPosColeta())
         <p><i class="fas fa-calendar-week"></i>
             Terminou em {{$inventario->data_fim->format('d/m/Y')}}</p>
+            <span class="badge bg-yellow">Aguardando Finalização</span>
         
         @else
         <p><i class="fas fa-calendar-week"></i>

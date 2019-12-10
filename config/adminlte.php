@@ -136,38 +136,7 @@ return [
         [
             'text' => 'Inventários',
             'url'  => 'admin/inventarios',
-            'icon' => 'fas fa-boxes',
-            'submenu' => [
-                [
-                    'text' => 'Todos',
-                    'url'  => 'admin/inventarios',
-                    'icon' => 'fas fa-th'
-                ],
-
-                [
-                    'text' => 'Pre Coleta',
-                    'url'  => 'admin/inventarios',
-                    'icon' => 'far fa-hourglass'
-                ],
-            
-                [
-                    'text' => 'Em Coleta',
-                    'url'  => 'admin/inventarios',
-                    'icon' => 'fas fa-hourglass-half'
-                ],
-            
-                [
-                    'text' => 'Pos Coleta',
-                    'url'  => 'admin/inventarios',
-                    'icon' => 'fas fa-hourglass'
-                ],
-            
-                [
-                    'text' => 'Finalizados',
-                    'url'  => 'admin/inventarios',
-                    'icon' => 'fas fa-check'
-                ],
-            ],
+            'icon' => 'fas fa-boxes'
         ],
         [
             'text' => 'Manual',

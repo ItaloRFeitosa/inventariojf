@@ -109,7 +109,7 @@ class MembroController extends Controller
   
 
         if($membro->update($dataform)){
-                return redirect()->route('inventario.membros.index', $membro->inventario)->with('status', 'Membro Atualizado com Sucesso');
+                return redirect()->back()->with('status', 'Membro Atualizado com Sucesso');
             }
     }
         
@@ -155,6 +155,30 @@ class MembroController extends Controller
             } else {
                 return redirect()->route('inventario.membros.index', $inventario)->with('warning', 'Erro desconhecido: ' + $e->getMessage());
             }
+        }
+    }
+
+    public function tornaAdm($id){
+        
+        $membro = Membro::findOrFail($id);
+        if ($membro->tornaAdm()) {
+            return redirect()->route('inventario.membros.index', $membro->inventario)
+            ->with('status', 'O membro agora é administrador!');
+        } else {
+            return redirect()->route('inventario.membros.index', $membro->inventario)
+            ->with('warning', 'Procedimento Falhou!');
+        }
+        
+    }
+    public function retirarAdm($id){
+        
+        $membro = Membro::findOrFail($id);
+        if ($membro->retirarAdm()) {
+            return redirect()->route('inventario.membros.index', $membro->inventario)
+            ->with('status', 'Foi retirado os privilegios de administrador do membro!');
+        } else {
+            return redirect()->route('inventario.membros.index', $membro->inventario)
+            ->with('warning', 'Procedimento Falhou!');
         }
     }
 }

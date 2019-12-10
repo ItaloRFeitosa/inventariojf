@@ -1,4 +1,4 @@
-<div class="box box-success">
+<div class="box box-info">
         <div class="box-header">
                 <h3 class="box-title" style="display: inline-block">Adicionar Membro</h3>
         </div>
@@ -7,7 +7,7 @@
                 {{csrf_field()}}
                 <div class="row">
                     <input type="hidden" name='id_inventario' value={{$inventario->id}}>
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                             <div class="form-group">
                                     <label for="nu_matr_servidor">Matrícula - Nome</label>
                                     <div class="input-group">
@@ -26,18 +26,23 @@
                                     </div>    
                             </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                             <div class="form-group">
-                                    <label for="flag_adm">Privilégios:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="fas fa-users-cog"></i>
-                                        </div>
-                                            <select  name='flag_adm' id="flag_adm" class="form-control">
-                                                        <option value=1 >Sim</option>
-                                                        <option value=0 selected>Não</option>
-                                            </select>
-                                    </div>    
+                                
+                                    <label for="flag_adm">
+                                        <i class="fas fa-users-cog"></i>
+                                        Funções Administrativas
+                                    </label>
+                                     
+                                    <div class="checkbox">
+                                            
+                                        <label>
+                                          <input type="checkbox" id="flag_adm" name="flag_adm" value=1>
+                                            Habilitar
+                                        </label>
+                                    </div>
+                                    
+                                       
                             </div>
                     </div>
                 </div>
@@ -47,7 +52,7 @@
                                         <label for="responsabilidades">Lotações a ser responsável:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
-                                                <i class="fas fa-map-marker"></i>
+                                                <i class="fa fa-fw fa-sitemap"></i>
                                             </div>
                                                 <select  name='responsabilidades[]' id="responsabilidades" class="form-control" multiple='multiple'>
                                                    @foreach ($lotacoes as $chave => $lotacao)
@@ -76,7 +81,7 @@
                                     <button class="btn btn-warning btn-block" type="reset"><i class="fa fa-times" aria-hidden="true"></i> Limpar</button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
+                                    <button class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Adicionar</button>
                                 </div>
                 
                 
@@ -111,3 +116,5 @@
     
 </script>
 @endpush
+
+

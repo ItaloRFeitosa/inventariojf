@@ -1,4 +1,4 @@
-<div class="box box-success">
+<div class="box box-info">
     <div class="box-body">
         <form method="POST" action="{{route('inventarios.store')}}">
             {{csrf_field()}}
@@ -93,6 +93,26 @@
                 </div>
                 </tb>
                 <!--INPUT PERIODO  DE DURAÇÃO INVENTARIO -->
+                <tb>
+                <div class="col-md-12">
+                    <div class="form-group">
+                            <label for="nu_matr_servidor">Presidente da Comissão</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <select  name='nu_matr_servidor' id="nu_matr_servidor" class="form-control">
+                                    @foreach ($servidores as $servidor)
+                                            <option value="{{ $servidor->nu_matr_servidor }}">
+                                                    {{ $servidor->nu_matr_servidor }} - 
+                                                    {{ $servidor->no_servidor }}
+                                            </option>
+                                    @endforeach
+                                </select>
+                            </div>    
+                    </div>
+                </div>
+                </tb>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="obs">Observação</label>
@@ -124,3 +144,20 @@
         </form>
     </div>
 </div>
+
+@push('js')
+<script>
+    $(document).ready(function () {
+        
+        $("#nu_matr_servidor").select2({
+            allowClear: true,
+            placeholder: {
+                id: '-1',
+                text: "Selecione o Servidor"
+            }
+        });
+        
+    });
+    
+</script>
+@endpush
