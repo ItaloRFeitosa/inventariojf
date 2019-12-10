@@ -8,9 +8,9 @@
         <h3 class="box-title" style="display: inline-block">Membros da Comissão</h3>
 
         @if($inventario->isPreColeta() || $inventario->isColetaAtiva())
-        <a href="{{route('inventario.membros.index',$inventario)}}" class="btn btn-success btn-sm pull-right"><i class="fas fa-plus"></i> Editar Comissão</a>
+        <a href="{{route('inventario.membros.index',$inventario)}}" class="btn btn-success btn-sm pull-right"><i class="fas fa-edit"></i> Comissão</a>
         @else
-        <a href="{{route('inventario.membros.index',$inventario)}}" class="btn btn-success btn-sm pull-right"><i class="fas fa-eye"></i> Responsabilidades</a>
+        <a href="{{route('inventario.membros.index',$inventario)}}" class="btn btn-success btn-sm pull-right"><i class="fas fa-eye"></i> Comissão</a>
         @endif
         
     </div>

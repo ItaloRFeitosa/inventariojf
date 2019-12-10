@@ -30,6 +30,7 @@ class InventarioFormRequest extends FormRequest
             'portaria'=> 'bail|required',
             'data_inicio'=> 'bail|required|date',
             'duracao'=> 'bail|required|numeric',
+            'nu_matr_servidor' => 'bail|required',
             'obs'=> 'bail|nullable',
         ];
     }

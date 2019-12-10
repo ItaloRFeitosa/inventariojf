@@ -34,6 +34,14 @@ class Membro extends Model
         }
     }
 
+    public function tornaAdm(){
+        return Membro::update( ['flag_adm' => '1'] );
+    }
+
+    public function retirarAdm(){
+        return Membro::update( ['flag_adm' => '0'] );
+    }
+
     public function insertResponsabilidades($lotacoes){
         try {
             foreach($lotacoes as $lota_cod){

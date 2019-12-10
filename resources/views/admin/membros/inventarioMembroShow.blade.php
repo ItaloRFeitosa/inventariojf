@@ -10,7 +10,7 @@
         <i class="fas fa-chevron-circle-left"></i> 
     </a>
     
-    <i class="fas fa-boxes"></i> {{$inventario->name}} - {{$membro->servPessoal()->no_servidor}}
+    <i class="fas fa-user"></i> {{$inventario->name}} - {{$membro->servPessoal()->no_servidor}}
     
     @if($membro->flag_adm)
     <span class="label label-success">ADM</span>

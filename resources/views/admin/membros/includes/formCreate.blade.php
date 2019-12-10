@@ -1,4 +1,4 @@
-<div class="box box-success">
+<div class="box box-info">
         <div class="box-header">
                 <h3 class="box-title" style="display: inline-block">Adicionar Membro</h3>
         </div>
@@ -52,7 +52,7 @@
                                         <label for="responsabilidades">Lotações a ser responsável:</label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
-                                                <i class="fas fa-map-marker"></i>
+                                                <i class="fa fa-fw fa-sitemap"></i>
                                             </div>
                                                 <select  name='responsabilidades[]' id="responsabilidades" class="form-control" multiple='multiple'>
                                                    @foreach ($lotacoes as $chave => $lotacao)
@@ -80,7 +80,7 @@
                                     <button class="btn btn-warning btn-block" type="reset"><i class="fa fa-times" aria-hidden="true"></i> Limpar</button>
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Salvar</button>
+                                    <button class="btn btn-success btn-block" type="submit"><i class="fa fa-save" aria-hidden="true"></i> Adicionar</button>
                                 </div>
                 
                 

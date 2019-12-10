@@ -4,7 +4,12 @@
 
 @section('content_header')
 
-    <h1><i class="fas fa-boxes"></i> Criando novo inventario</h1>
+    <h1>
+        <a class="btn-default"  title="Voltar" href="{{route('inventarios.index')}}" >
+            <i class="fas fa-chevron-circle-left"></i> 
+        </a>
+        <i class="fas fa-boxes"></i> Novo inventario
+    </h1>
     
 @stop
 

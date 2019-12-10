@@ -37,8 +37,8 @@
                             <i class="fas fa-eye"></i></a>&nbsp;&nbsp;
 
                         @if($membro->inventario->isPreColeta() || $membro->inventario->isColetaAtiva())
-                        <a type="button" class="btn btn-default" href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Editar Responsabilidades/Excluir Membro">
-                            <i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                        <a type="button" class="btn btn-default" href="{{route('inventario.membro.edit', [$membro->inventario, $membro])}}" title="Lotações responsaveis">
+                            <i class="fa fa-fw fa-sitemap"></i></a>&nbsp;&nbsp;
                         @endif
 
                         </div>

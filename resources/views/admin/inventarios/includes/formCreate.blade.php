@@ -1,4 +1,4 @@
-<div class="box box-success">
+<div class="box box-info">
     <div class="box-body">
         <form method="POST" action="{{route('inventarios.store')}}">
             {{csrf_field()}}

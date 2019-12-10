@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\Admin\MembroController;
 use App\Models\Oracle\Sicam\Material;
 use App\Models\Oracle\Sicam\Tombo;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,8 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         Route::get('{inventario}/membros', 'MembroController@inventarioMembrosIndex')->name('inventario.membros.index');
         Route::get('{inventario}/membros/{membro}', 'MembroController@inventarioMembrosShow')->name('inventario.membros.show');
         Route::get('{inventario}/membros/{membro}/edit', 'MembroController@inventarioMembroEdit')->name('inventario.membro.edit');
+        Route::get('{id}/tornaAdm', 'MembroController@tornaAdm')->name('inventario.membro.tornaAdm');
+        Route::get('{id}/retirarAdm', 'MembroController@retirarAdm')->name('inventario.membro.retirarAdm');
     });
     
     
