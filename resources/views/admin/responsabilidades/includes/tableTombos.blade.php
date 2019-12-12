@@ -1,5 +1,7 @@
+@foreach ($responsabilidade->lotacao()->setores() as $setor)
 <div class="box">
-    <div class="box-header"></div>
+    <div class="box-header">
+    </div>
     <div class="box-body">
         <table class="table">
             <tr>
@@ -9,7 +11,7 @@
                 <th style="width: 10%">DATA TERMO</th>
                 <th colspan="2" style="width: 25%">RESPONSAVEL</th>
             </tr>
-            @foreach ($responsabilidade->lotacao()->tombos() as $tombo)
+                @foreach ($setor->tombos() as $tombo)
                 <tr>
                     <td>T {{$tombo->nu_tombo}}</td>
                     <td> {{$tombo->co_mat}}</td>
@@ -28,6 +30,7 @@
         </table>
     </div>
     <div class="box-footer">
-        <div class="pull-right">{{$responsabilidade->lotacao()->tombos()->links()}}</div>
+        <div class="pull-right">{{$setor->tombos()->links()}}</div>
     </div>
 </div>
+@endforeach

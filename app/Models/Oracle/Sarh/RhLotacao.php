@@ -4,7 +4,7 @@ namespace App\Models\Oracle\Sarh;
 
 use App\Models\Oracle\Sicam\PatrimonioSetor;        
 use App\Models\Oracle\Sicam\Termo;        
-use App\Models\Oracle\Sicam\Tombo;        
+use App\Models\Oracle\Sicam\Tombo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -23,6 +23,9 @@ class RhLotacao extends Model
         $lotacoes = RhLotaTraducao::where('LOTR_LOTA_COD_LOTACAO', $this->lota_cod_lotacao)->get()->map(function($lotacao){
             return $lotacao->lotr_co_antigo_lotacao;
         });
+      
+       
+
         
         $tombos = Tombo::join('termo', function($join){
                                 $join->on('TOMBO.AN_TERMO', 'TERMO.AN_TERMO')
@@ -31,11 +34,28 @@ class RhLotacao extends Model
                                 ->select('tombo.*')
                                 ->whereIn('TERMO.CO_LOTA', $lotacoes)
                                 ->where('TI_TOMBO', '=', 'T')
-                                ->paginate(12);
-        
+                                ->get();
+
         return $tombos;
     }
 
+    public function setores(){
+        $lotacoes = RhLotaTraducao::where('LOTR_LOTA_COD_LOTACAO', $this->lota_cod_lotacao)->get();
+        $setores = [];
+        foreach($lotacoes as $lotacao){
+            foreach($lotacao->setores() as $setor){
+                if(!empty($setor)){
+                    array_push($setores,$setor);
+                }
+            }
+        }
+        $setores = collect($setores);
+        // $setores = $setores->->mapSpread(function($setor){
+        //     return $setor;
+        // });
+        dd($setores);
+        return $setores;
+    }
     public function hasTombos(){
 
         try {
@@ -56,11 +76,6 @@ class RhLotacao extends Model
             return false;
         }
 
-    }
-
-
-    public function setores(){
-        return PatrimonioSetor::where('CO_LOTA', $this->lota_cod_lotacao)->get();
     }
 
     public function lotacaoPai(){

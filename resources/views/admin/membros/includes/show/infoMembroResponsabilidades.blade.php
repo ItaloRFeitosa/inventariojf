@@ -35,7 +35,7 @@
 
                         <div class="pull-right btn-group">
                         
-                            <a type="button" class="btn btn-default" href="#" title="Visualizar Tombos">
+                        <a type="button" class="btn btn-default" href="{{route('responsabilidades.show', $responsabilidade)}}" title="Visualizar Tombos">
                                 <i class="fas fa-eye"></i></a>&nbsp;&nbsp;
     
                         </div>

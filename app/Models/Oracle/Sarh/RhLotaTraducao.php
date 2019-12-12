@@ -20,10 +20,12 @@ class RhLotaTraducao extends Model
     // }
 
     public function termos($ano){
-        return Termo::where('AN_TERMO', $ano)->where('CO_LOTA', $this->lotr_co_antigo_lotacao)->get()->map();
+        return Termo::where('AN_TERMO', $ano)->where('CO_LOTA', $this->lotr_co_antigo_lotacao)->get();
     }
 
-    
+    public function setores(){
+        return PatrimonioSetor::where('co_lota', $this->lotr_co_antigo_lotacao)->get();
+    }
 }
 
 
