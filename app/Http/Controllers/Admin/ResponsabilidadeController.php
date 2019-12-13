@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Oracle\Sicam\PatrimonioSetor;
+use App\Models\Membro;
 use App\Models\Responsabilidade;
+use App\Models\Oracle\Sarh\RhLotacao;
 
 class ResponsabilidadeController extends Controller
 {
@@ -26,7 +28,8 @@ class ResponsabilidadeController extends Controller
      */
     public function create()
     {
-        //
+        $lotacoes = RhLotacao::paisEFilhas();
+        return view('admin.membros.inventarioMembrosEdit', compact('lotacoes'));
     }
 
     /**
@@ -37,7 +40,37 @@ class ResponsabilidadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataform = $request->all();
+        $lotacoes = $dataform['responsabilidades'];
+        $membro = Membro::find($dataform['id_membro']);        
+        $repetidas = NULL;
+        $naorepetidas = NULL;
+
+        foreach($lotacoes as $lota_cod){
+            if ( !Responsabilidade::where('ID_MEMBRO',$dataform['id_membro'])->where('COD_LOTACAO',$lota_cod)->count() ){
+                $responsabilidade = new Responsabilidade;
+                $responsabilidade->cod_lotacao = $lota_cod;
+                $responsabilidade->cod_setor = 'sem setor';//por enquanto
+                $responsabilidade->id_membro = $membro->id;
+                $responsabilidade->save();
+                $naorepetidas=+1;
+            }else{
+                $repetidas=+1;
+            }
+        }
+
+        if(!$repetidas && $naorepetidas){
+            $request->session()
+            ->flash('status',"Responsabilidades foram adicionadas com sucesso!");
+        }elseif($repetidas && $naorepetidas){
+            $request->session()
+            ->flash('status ',"Responsabilidades foram adicionadas com sucesso, algumas já exitiam para o membro!");
+        }elseif($repetidas && !$naorepetidas){
+            $request->session()
+            ->flash('status',"Está responsabilidde já exite!");
+        }
+
+        return redirect()->route('inventario.membro.edit', [$membro->inventario, $membro] );
     }
 
     /**

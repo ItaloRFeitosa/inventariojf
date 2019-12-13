@@ -10,6 +10,8 @@ use App\Models\Oracle\Sarh\ServPessoal;
 use App\Models\Oracle\Sarh\RhLotacao;
 use App\Models\Responsabilidade;
 use App\Services\CriadorDeMembro;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Throwable;
 
 class MembroController extends Controller
 {
@@ -28,7 +30,7 @@ class MembroController extends Controller
         $servidores = ServPessoal::ativos()->get();
         $lotacoes = RhLotacao::paisEFilhas();
         
-        //dd($lotacoes);
+        
         return view('admin.membros.inventarioMembrosIndex', compact('servidores','inventario', 'lotacoes'));
     }
 
@@ -71,6 +73,8 @@ class MembroController extends Controller
      */
     public function inventarioMembrosShow(Inventario $inventario, Membro $membro)
     {   
+        //dd($membro->responsabilidades);
+        
         return view('admin.membros.inventarioMembroShow', compact('inventario','membro'));
     }
 
@@ -112,12 +116,7 @@ class MembroController extends Controller
                 return redirect()->back()->with('status', 'Membro Atualizado com Sucesso');
             }
     }
-        
-
-        
     
-    
-
     /**
      * Remove the specified resource from storage.
      *
@@ -170,6 +169,7 @@ class MembroController extends Controller
         }
         
     }
+    
     public function retirarAdm($id){
         
         $membro = Membro::findOrFail($id);

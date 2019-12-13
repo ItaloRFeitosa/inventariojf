@@ -8,10 +8,53 @@
         <div class="box-header">
           <h3 class="box-title">Responsabilidades</h3>
 
-          
-
-        </a>
+        
         </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST" id = "addResponsabilidade" action="{{route('responsabilidades.store')}}">
+                        {{csrf_field()}}
+                        <input type="hidden" name='id_membro' value={{$membro->id}}>
+                        <div class="form-group">
+                                <label for="responsabilidades"></label>
+                                <div class="input-group margin">
+                                    
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-fw fa-sitemap"></i>
+                                    </div>
+
+                                    <select name='responsabilidades[]' id="responsabilidades" class="form-control" multiple='multiple'>
+                                        
+                                        @foreach ($lotacoes as $chave => $lotacao)
+                                            <optgroup label="{{$chave}}">
+                                        
+                                        @foreach ($lotacao as $filho)
+                                        
+                                                <option value="{{ $filho->lota_cod_lotacao }}">
+                                                        {{ $filho->lota_cod_lotacao }} -
+                                                        {{ $filho->lota_sigla_lotacao }} - 
+                                                        {{ $filho->lota_dsc_lotacao }}
+                                                </option>
+                                                
+                                        @endforeach
+                                            </optgroup>
+                                        @endforeach
+
+                                    </select>
+                                        
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success " form='addResponsabilidade' type="submit">
+                                            <i class="fas fa-plus" aria-hidden="true"></i>
+                                        </button> 
+                                    </span> 
+
+                              </div>           
+                        </div>
+                    </form>
+                </div>
+            </div>
+  
         <!-- /.box-header -->
         <div class="box-body no-padding">
           <table class="table">
@@ -56,4 +99,3 @@
         <!-- /.box-body -->
       </div>
     </div>
-
