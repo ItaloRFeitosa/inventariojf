@@ -60,6 +60,6 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     
     
     
-    
+    Route::get('responsabilidades/{responsabilidade}/{key}', 'ResponsabilidadeController@showTombos')->name('responsabilidades.showTombos');
 
 });

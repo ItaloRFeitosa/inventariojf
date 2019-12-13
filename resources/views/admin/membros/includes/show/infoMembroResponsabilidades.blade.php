@@ -37,7 +37,9 @@
                         
                         <a type="button" class="btn btn-default" href="{{route('responsabilidades.show', $responsabilidade)}}" title="Visualizar Tombos">
                                 <i class="fas fa-eye"></i></a>&nbsp;&nbsp;
-    
+                                
+                        <a type="button" class="btn btn-default" href="{{route('responsabilidades.showTombos', [$responsabilidade,0])}}" title="Visualizar Tombos">
+                                <i class="fas fa-eye"></i></a>&nbsp;&nbsp;    
                         </div>
 
                     </td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Oracle\Sicam\PatrimonioSetor;
 use App\Models\Responsabilidade;
 
 class ResponsabilidadeController extends Controller
@@ -48,8 +49,18 @@ class ResponsabilidadeController extends Controller
     public function show(Responsabilidade $responsabilidade)
     {
         //dd($responsabilidade);
-        return view('admin.responsabilidades.show', compact('responsabilidade'));
+        //return view('admin.responsabilidades.show', compact('responsabilidade'));
     }
+
+
+    public function showTombos(Responsabilidade $responsabilidade, $key)
+    {
+        $setor = $responsabilidade->lotacao()->setores()[$key];
+        
+        //dd($setor);
+        return view('admin.responsabilidades.show', compact('responsabilidade','setor'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

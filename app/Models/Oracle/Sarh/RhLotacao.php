@@ -53,7 +53,7 @@ class RhLotacao extends Model
         // $setores = $setores->->mapSpread(function($setor){
         //     return $setor;
         // });
-        dd($setores);
+        //dd($setores[0]);
         return $setores;
     }
     public function hasTombos(){

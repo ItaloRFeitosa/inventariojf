@@ -31,7 +31,7 @@ class PatrimonioSetor extends Model
                                 ->where('TERMO.CO_LOTA', $this->co_lota)
                                 ->where('TERMO.CO_SETOR', $this->co_setor)
                                 ->where('TI_TOMBO', '=', 'T')
-                                ->paginate();
+                                ->paginate(10);
 
         return $tombos;
     }
