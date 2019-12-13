@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Membro;
 use App\Models\Responsabilidade;
 use App\Models\Oracle\Sarh\RhLotacao;
 
@@ -40,19 +41,35 @@ class ResponsabilidadeController extends Controller
     {
         $dataform = $request->all();
         $lotacoes = $dataform['responsabilidades'];
-       
+        $membro = Membro::find($dataform['id_membro']);        
+        $repetidas = NULL;
+        $naorepetidas = NULL;
+
         foreach($lotacoes as $lota_cod){
-            $responsabilidade = new Responsabilidade;
-            $responsabilidade->cod_lotacao = $lota_cod;
-            $responsabilidade->cod_setor = 'sem setor';//por enquanto
-            $responsabilidade->id_membro = $dataform['id_membro'];
-            $responsabilidade->save();
+            if ( !Responsabilidade::where('ID_MEMBRO',$dataform['id_membro'])->where('COD_LOTACAO',$lota_cod)->count() ){
+                $responsabilidade = new Responsabilidade;
+                $responsabilidade->cod_lotacao = $lota_cod;
+                $responsabilidade->cod_setor = 'sem setor';//por enquanto
+                $responsabilidade->id_membro = $membro->id;
+                $responsabilidade->save();
+                $naorepetidas=+1;
+            }else{
+                $repetidas=+1;
+            }
         }
 
-        $request->session()
-            ->flash('status',"Responsabilidade foi adicionada com sucesso com sucesso");
-    
-        return redirect()->route('inventario.membro.edit', [$responsabilidade->membro->inventario, $responsabilidade->membro] );
+        if(!$repetidas && $naorepetidas){
+            $request->session()
+            ->flash('status',"Responsabilidades foram adicionadas com sucesso!");
+        }elseif($repetidas && $naorepetidas){
+            $request->session()
+            ->flash('status ',"Responsabilidades foram adicionadas com sucesso, algumas já exitiam para o membro!");
+        }elseif($repetidas && !$naorepetidas){
+            $request->session()
+            ->flash('status',"Está responsabilidde já exite!");
+        }
+
+        return redirect()->route('inventario.membro.edit', [$membro->inventario, $membro] );
     }
 
     /**

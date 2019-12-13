@@ -71,6 +71,8 @@ class MembroController extends Controller
      */
     public function inventarioMembrosShow(Inventario $inventario, Membro $membro)
     {   
+        //dd($membro->responsabilidades);
+        
         return view('admin.membros.inventarioMembroShow', compact('inventario','membro'));
     }
 

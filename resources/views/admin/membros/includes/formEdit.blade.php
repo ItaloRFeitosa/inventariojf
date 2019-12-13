@@ -13,9 +13,6 @@
         
         </div>
         <div class="box-body">
-            <form method="POST" id = "formUpdate" action="{{route('membros.update', $membro)}}">
-                {{csrf_field()}}
-                {{method_field('PUT')}}
                 <div class="row">
                     <div class="col-md-2">
                             <div class="form-group">
@@ -28,19 +25,13 @@
                                     </div>    
                             </div>
                     </div>
-
                     <div class="col-md-10">
                             <div class="form-group">
                                     <label for="nu_matr_servidor">Nome</label>
                                     <input type="text" class='form-control' disabled value="{{$membro->servPessoal()->no_servidor}}"></td>  
                             </div>
-                    </div>
-
-                    
+                    </div>  
                 </div>
-            
-                    
-            
         </div>
 </div>
 
@@ -65,7 +56,5 @@
         }
         );
     });
-
-    
 </script>
 @endpush

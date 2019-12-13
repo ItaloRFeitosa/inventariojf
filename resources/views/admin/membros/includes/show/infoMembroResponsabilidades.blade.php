@@ -21,6 +21,7 @@
             <tbody><tr>
               <th style="width: 18%">Relativos</th>
               <th>Lotação</th>
+              <th>Diretor/Supervisor</th>
               <th style="width: 100px">Coletas</th>
               <th style="width: 50px">Tombos</th>
             </tr>
@@ -28,6 +29,7 @@
                 <tr>
                     <td>{{$responsabilidade->lotacao()->hierarquia()}}</td>
                     <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }} - {{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
+                    <td></td>
                     <td>
                         <span class="badge bg-light-blue">50/100</span>
                     </td>
