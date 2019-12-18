@@ -34,6 +34,7 @@ class RhLotacao extends Model
                                 ->select('tombo.*')
                                 ->whereIn('TERMO.CO_LOTA', $lotacoes)
                                 ->where('TI_TOMBO', '=', 'T')
+                                ->orderBy('TOMBO.NU_TOMBO')
                                 ->get();
 
         return $tombos;
