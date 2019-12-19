@@ -17,8 +17,8 @@
             {{csrf_field()}}
         
         <select class='form-control pull-right' style="width: 20%" name="perPage" id="lista">
-            <option selected value="10">10 tombos por página</option>
-            <option value="50">50 tombos por página</option>
+            <option  value="15">15 tombos por página</option>
+            <option selected value="50">50 tombos por página</option>
             <option value="100">100 tombos por página</option>
             <option value="500">500 tombos por página</option>
             <option value="1000">1000 tombos por página</option>
@@ -35,7 +35,7 @@
                 <th style="width: 10%">Estado</th>
                 <th style="width: 20%">Obs:</th>
             </tr>
-            @foreach ($setor->tombos($perPage) as $tombo)
+            @foreach ($setor->tombos(50) as $tombo)
             <tr>
                 
                 <td>T {{$tombo->nu_tombo}}</td><input type="hidden" name='nu_tombo' value="{{$tombo->nu_tombo}}">
@@ -56,17 +56,17 @@
         </table>
     </div>
     <div class="box-footer">
-        <div class="col-md-2"><p>Total de {{$setor->tombos($perPage)->total()}} neste Setor</p></div>
-        <div class="pull-right">{{$setor->tombos($perPage)->links()}}</div>
+        <div class="col-md-2"><p>Total de {{$setor->tombos(50)->total()}} neste Setor</p></div>
+        <div class="pull-right">{{$setor->tombos(50)->links()}}</div>
     </div>
 </div>
 
 @push('js')
 <script>
     $(document).ready(function () {
-        $("#lista").on('change', function(){
-            $('#perpage').submit();
-        });
+        // $("#lista").on('click', function(){
+        //     $('#perpage').submit();
+        // });
     });
 </script>
 @endpush

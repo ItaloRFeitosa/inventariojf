@@ -9,7 +9,7 @@ use App\Models\Responsabilidade;
 class ColetaController extends Controller
 {
 
-    private $perPage = 10;
+    
 
 
     /**
@@ -58,17 +58,18 @@ class ColetaController extends Controller
         $dataform = $request->all();
 
         //dd($dataform['perPage']);
-        $this->perPage = intval($dataform['perPage']);
-        //dd($this->perPage);
-        return redirect()->back();
+        $perPage = intval($dataform['perPage']);
+        return redirect()->back()->with(['paginate' => $perPage]);
     }
 
 
     public function showTombos(Responsabilidade $responsabilidade, $key){
         $setor = $responsabilidade->lotacao()->setores()[$key];
-        $perPage = $this->perPage;
-        //dd($this->perPage);
-        return view('admin.coletas.show', compact('responsabilidade','setor', 'perPage'));
+        return view('admin.coletas.show', compact('responsabilidade','setor'));
+    }
+
+    public function iniciarColetas(){
+        
     }
 
     /**

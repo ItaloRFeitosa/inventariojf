@@ -27,7 +27,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            @include('admin.coletas.includes.tableTombos', compact('setor', 'perPage'))
+            @include('admin.coletas.includes.tableTombos', compact('setor'))
         </div>
         
     </div>
