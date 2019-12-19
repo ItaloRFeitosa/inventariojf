@@ -24,7 +24,7 @@ class InventarioFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'bail|required',
+            'name'=> 'bail|required|unique:inventarios',
             'ano'=> 'bail|required|date_format:"Y"',
             'localidade'=> 'bail|required',
             'portaria'=> 'bail|required',
@@ -38,6 +38,7 @@ class InventarioFormRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.unique' => 'Já exite um inventario com este nome',
             'required' => 'O campo :attribute é obrigatório',
             'ano.date_format:"Y"' => 'O campo :attribute está em formato invalido',
             'localidade.*' => 'A localidade não foi selecionada',

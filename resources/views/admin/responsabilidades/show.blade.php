@@ -27,7 +27,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            @include('admin.responsabilidades.includes.tableTombos', compact('$setor'))
+            @include('admin.responsabilidades.includes.tableTombos', compact('setor'))
         </div>
         
     </div>
