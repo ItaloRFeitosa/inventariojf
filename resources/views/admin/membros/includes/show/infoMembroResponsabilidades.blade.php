@@ -17,32 +17,30 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding">
-          <table class="table">
+          <table class="table with-border">
             <tbody><tr>
               <th style="width: 18%">Relativos</th>
               <th>Lotação</th>
               <th>Diretor/Supervisor</th>
-              <th style="width: 100px">Coletas</th>
-              <th style="width: 50px">Tombos</th>
+              <th style="width: 150px">Coletas</th>
+              <th style="width: 100px">Tombos</th>
             </tr>
             @foreach ($membro->responsabilidades()->paginate(5) as $responsabilidade)
                 <tr>
                     <td>{{$responsabilidade->lotacao()->hierarquia()}}</td>
-                    <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }} - {{ $responsabilidade->lotacao()->lota_dsc_lotacao }}</td>
+                    <td>{{ $responsabilidade->lotacao()->lota_sigla_lotacao }} - {{ $responsabilidade->lotacao()->lota_dsc_lotacao }}&nbsp;&nbsp; 
+                      <a type="button" class="btn btn-default" href="{{route('responsabilidades.showTombos', [$responsabilidade,0])}}" title="Visualizar Tombos Lotacao/Setor">
+                        <i class="fas fa-eye"></i>&nbsp;<i class="far fa-list-alt"></i></a>   
+                    </td>
                     <td></td>
                     <td>
-                        <span class="badge bg-light-blue">50/100</span>
-                    </td>
-                    <td>
-
-                        <div class="pull-right btn-group">
+                        <span class="badge bg-light-blue">50/100</span>&nbsp;&nbsp;
                         
-                        {{-- <a type="button" class="btn btn-default" href="{{route('responsabilidades.show', $responsabilidade)}}" title="Visualizar Tombos">
-                                <i class="fas fa-eye"></i></a>&nbsp;&nbsp; --}}
-                                
-                        <a type="button" class="btn btn-default" href="{{route('responsabilidades.showTombos', [$responsabilidade,0])}}" title="Visualizar Tombos">
-                                <i class="fas fa-eye"></i></a>&nbsp;&nbsp;    
-                        </div>
+                    </td>
+                    <td align="center">     
+                      <a type="button" class="btn btn-default" href="{{route('coletas.showTombos', [$responsabilidade,0])}}" title="Iniciar Coletas">
+                        <i class="fas fa-play"></i>&nbsp;<i class="fas fa-tasks"></i></a>
+            
 
                     </td>
                 </tr>

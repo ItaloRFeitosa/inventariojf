@@ -24,6 +24,10 @@ class Membro extends Model
         return $this->hasMany(Responsabilidade::class, 'id_membro');
     }
 
+    public function coletas(){
+        return $this->hasMany(Coleta::class, 'id_membro');
+    }
+
     public function servPessoal(){
         try {
             return ServPessoal::where('NU_MATR_SERVIDOR', $this->nu_matr_servidor)

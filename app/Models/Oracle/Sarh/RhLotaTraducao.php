@@ -15,9 +15,9 @@ class RhLotaTraducao extends Model
 
     protected $guarded = [];
 
-    // public function RhLotacao(){
-    //     return Rhlotacao::where();
-    // }
+    public function lotacao(){
+        return Rhlotacao::where('LOTA_COD_LOTACAO', $this->lotr_lota_cod_lotacao)->first();
+    }
 
     public function termos($ano){
         return Termo::where('AN_TERMO', $ano)->where('CO_LOTA', $this->lotr_co_antigo_lotacao)->get();

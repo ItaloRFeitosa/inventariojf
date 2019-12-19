@@ -2,6 +2,7 @@
 
 namespace App\Models\Oracle\Sicam;
 
+use App\Models\Coleta;
 use App\Models\Oracle\Sarh\RhLotacao;
 use App\Models\Oracle\Sarh\RhLotaTraducao;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +22,7 @@ class PatrimonioSetor extends Model
         return Termo::where('CO_LOTA', $this->co_lota)->where('CO_SETOR', $this->co_setor)->get();
     }
 
-    public function tombos(){
+    public function tombos($perPage = 10){
         
         $tombos = Tombo::join('termo', function($join){
                                 $join->on('TOMBO.AN_TERMO', 'TERMO.AN_TERMO')
@@ -31,7 +32,8 @@ class PatrimonioSetor extends Model
                                 ->where('TERMO.CO_LOTA', $this->co_lota)
                                 ->where('TERMO.CO_SETOR', $this->co_setor)
                                 ->where('TI_TOMBO', '=', 'T')
-                                ->paginate(10);
+                                ->orderBy('TOMBO.NU_TOMBO')
+                                ->paginate($perPage);
 
         return $tombos;
     }
@@ -40,5 +42,9 @@ class PatrimonioSetor extends Model
     public function lotacao(){
         //return RhLotaTraducao::where('LOTA_COD_LOTACAO', $this->co_lota)->first();
 
+    }
+
+    public function coletas($id_membro){
+        return Coleta::where('id_membro', $id_membro)->where('cod_lotacao', $this->cod_lotacao)->where('cod_setor', $this->cod_setor)->get();
     }
 }

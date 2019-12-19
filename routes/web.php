@@ -61,5 +61,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     
     
     Route::get('responsabilidades/{responsabilidade}/{key}', 'ResponsabilidadeController@showTombos')->name('responsabilidades.showTombos');
+    Route::get('coletas/{responsabilidade}/{key}', 'ColetaController@showTombos')->name('coletas.showTombos');
+    Route::post('coletas/change_pagination', 'ColetaController@changePagination')->name('coletas.changePagination');
 
 });
